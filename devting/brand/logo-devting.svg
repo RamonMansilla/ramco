@@ -1,0 +1,13 @@
+<svg width="1200" height="360" viewBox="0 0 1200 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="360" rx="0" fill="#0B1020"/>
+  <g transform="translate(72 58)">
+    <rect x="0" y="0" width="244" height="244" rx="44" fill="#13D3A7"/>
+    <path d="M66 73L26 122L66 171" stroke="#0B1020" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M178 73L218 122L178 171" stroke="#0B1020" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M139 57L103 187" stroke="#0B1020" stroke-width="22" stroke-linecap="round"/>
+    <circle cx="122" cy="122" r="14" fill="#0B1020"/>
+  </g>
+  <text x="366" y="170" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="86" font-weight="800" letter-spacing="2">DEVTING</text>
+  <text x="372" y="222" fill="#98A2B3" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="500">Desarrollo tecnologico + marketing para vender mejor</text>
+  <path d="M374 248H734" stroke="#13D3A7" stroke-width="8" stroke-linecap="round"/>
+</svg>

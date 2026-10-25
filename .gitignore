@@ -1,0 +1,16 @@
+# Dependencias y artefactos
+node_modules/
+
+# Variables de entorno y credenciales (NUNCA subir)
+.env
+.env.*
+*.local
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de editor
+.vscode/
+.idea/
