@@ -1,0 +1,503 @@
+/* =====================================================================
+   RAMNCO · gráfico de proyección de ganancias
+   Prefijo obligatorio: `py-`. Sin hex fijos: todo sale de las variables
+   del tema (`--marca`, `--blanco`…) o de `--lp-*` cuando el componente
+   se monta dentro de la landing. Así funciona con los 6 temas,
+   incluido el claro.
+   ===================================================================== */
+
+.py-proyeccion {
+  /* --py-con / --py-sin caen a marca / marca-2; en la landing `--lp-purple`
+     y `--lp-blue` ya equivalen a ellas, y el fallback cubre el resto. */
+  --py-con: var(--lp-purple, var(--marca));
+  --py-sin: color-mix(in srgb, var(--blanco) 46%, transparent);
+  --py-superficie: var(--lp-surface, var(--noche-2));
+  --py-linea: var(--lp-line, var(--borde));
+  --py-linea-fuerte: var(--lp-line-2, var(--borde-fuerte));
+  --py-ink: var(--lp-ink, var(--blanco));
+  --py-ink-2: var(--lp-ink-2, var(--gris));
+  --py-ink-3: var(--lp-ink-3, var(--gris-2));
+  --py-ease: cubic-bezier(0.22, 0.68, 0.24, 1);
+
+  position: relative;
+  display: grid;
+  gap: clamp(18px, 3vw, 30px);
+  padding: clamp(20px, 3.6vw, 40px);
+  border: 1px solid var(--py-linea);
+  border-radius: var(--lp-radius, var(--radio));
+  background:
+    radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--py-con) 14%, transparent), transparent 62%),
+    var(--py-superficie);
+  box-shadow: var(--sombra);
+  color: var(--py-ink);
+  font-family: var(--fuente);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.py-proyeccion *,
+.py-proyeccion *::before,
+.py-proyeccion *::after {
+  box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------ cabecera */
+
+.py-cabecera {
+  display: grid;
+  gap: 8px;
+  max-width: 62ch;
+}
+
+.py-eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--py-con) 82%, var(--py-ink));
+}
+
+.py-titulo {
+  margin: 0;
+  font-family: var(--fuente-display);
+  font-size: clamp(1.5rem, 3.4vw, 2.3rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--py-ink);
+}
+
+.py-titulo-marca {
+  background: linear-gradient(102deg, var(--py-con) 0%, var(--lp-blue, var(--marca-2)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.py-bajada {
+  margin: 0;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  line-height: 1.6;
+  color: var(--py-ink-2);
+}
+
+/* ------------------------------------------------------------ cifra destacada */
+
+.py-cifra {
+  display: grid;
+  gap: 6px;
+  padding: clamp(16px, 2.6vw, 26px);
+  border: 1px solid color-mix(in srgb, var(--py-con) 34%, var(--py-linea));
+  border-radius: var(--lp-radius-sm, var(--radio-sm));
+  background:
+    linear-gradient(122deg, color-mix(in srgb, var(--py-con) 16%, transparent), transparent 70%),
+    color-mix(in srgb, var(--py-ink) 3%, transparent);
+}
+
+.py-cifra-etiqueta {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--py-ink-3);
+}
+
+.py-cifra-valor {
+  margin: 0;
+  font-family: var(--fuente-display);
+  font-size: clamp(2rem, 6.4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(100deg, var(--py-con) 0%, var(--lp-blue, var(--marca-2)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.py-cifra-nota {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--py-ink-3);
+}
+
+/* ------------------------------------------------------------ tablero */
+
+.py-tablero {
+  display: grid;
+  gap: clamp(18px, 3vw, 32px);
+  align-items: start;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+}
+
+.py-grafico {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* ------------------------------------------------------------ leyenda */
+
+.py-leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-size: 0.82rem;
+  color: var(--py-ink-2);
+}
+
+.py-leyenda-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.py-leyenda-linea {
+  width: 26px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--py-sin);
+}
+
+.py-leyenda-item--con .py-leyenda-linea {
+  background: linear-gradient(90deg, var(--py-con), var(--lp-blue, var(--marca-2)));
+}
+
+/* La curva "sin" es gris claro: el nombre lleva el color para no
+   confundirse con el guion de la leyenda. */
+.py-leyenda-nombre {
+  font-weight: 600;
+}
+
+.py-leyenda-nombre--sin {
+  color: var(--py-ink-2);
+}
+
+.py-leyenda-nombre--con {
+  color: var(--py-con);
+}
+
+/* ------------------------------------------------------------ SVG */
+
+.py-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  /* el texto debe escalar con el viewBox, no con la página */
+  font-family: var(--fuente);
+}
+
+.py-grilla line {
+  stroke: var(--py-linea);
+  stroke-width: 1;
+}
+
+.py-grilla text,
+.py-meses text {
+  fill: var(--py-ink-3);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.py-grilla text {
+  letter-spacing: 0.01em;
+}
+
+.py-meses-titulo {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.py-area {
+  /* la mancha aparece con el trazo, sin parpadeo */
+  opacity: 0;
+  transition: opacity 900ms var(--py-ease) 500ms;
+}
+
+.py-proyeccion[data-listo="si"] .py-area {
+  opacity: 1;
+}
+
+.py-linea {
+  fill: none;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  /* el trazo sólo se anima en el primer dibujo; después no hay transición */
+  transition: stroke-dashoffset 0ms linear;
+}
+
+/* La curva "sin" es de referencia: punteada y bien visible sobre el área
+   sombreada, para que se distinga de la curva sólida de RAMNCO. */
+.py-linea--sin {
+  stroke: color-mix(in srgb, var(--py-ink) 62%, transparent);
+  stroke-width: 2.4;
+  stroke-dasharray: 1 7;
+  stroke-linecap: round;
+}
+
+.py-linea--con {
+  stroke: var(--py-con);
+  stroke-width: 2.8;
+  filter: drop-shadow(0 3px 10px color-mix(in srgb, var(--py-con) 42%, transparent));
+}
+
+.py-punto {
+  stroke: var(--lp-bg, var(--noche));
+  stroke-width: 1.5;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.4);
+  transition:
+    opacity 260ms var(--py-ease),
+    transform 260ms var(--py-ease);
+}
+
+.py-punto[data-visible="si"] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.py-punto--sin {
+  fill: var(--py-sin);
+}
+
+.py-punto--con {
+  fill: var(--py-con);
+}
+
+.py-svg-nota {
+  margin: 0;
+  font-size: 0.76rem;
+  color: var(--py-ink-3);
+}
+
+/* ------------------------------------------------------------ controles */
+
+.py-controles {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.py-controles-titulo {
+  margin: 0;
+  font-family: var(--fuente-display);
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  color: var(--py-ink);
+}
+
+.py-control {
+  display: grid;
+  gap: 6px;
+}
+
+.py-control-cabeza {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.py-control-cabeza label {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--py-ink-2);
+  cursor: pointer;
+}
+
+.py-control-valor {
+  font-size: 0.92rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--py-ink);
+}
+
+.py-control-ayuda {
+  margin: 0;
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: var(--py-ink-3);
+}
+
+/* Slider nativo: sólo se pinta la pista (barra de avance) y el pulgar. */
+.py-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 26px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  --py-avance: 50%;
+}
+
+.py-slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--py-con) 0%,
+    color-mix(in srgb, var(--py-con) 70%, var(--lp-blue, var(--marca-2))) var(--py-avance),
+    color-mix(in srgb, var(--py-ink) 14%, transparent) var(--py-avance),
+    color-mix(in srgb, var(--py-ink) 14%, transparent) 100%
+  );
+}
+
+.py-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--py-ink) 14%, transparent);
+}
+
+.py-slider::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--py-con), var(--lp-blue, var(--marca-2)));
+}
+
+.py-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;
+  border: 2px solid var(--py-con);
+  border-radius: 50%;
+  background: var(--lp-bg-2, var(--noche-3));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--py-con) 16%, transparent);
+  transition:
+    transform 160ms var(--py-ease),
+    box-shadow 160ms var(--py-ease);
+}
+
+.py-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--py-con);
+  border-radius: 50%;
+  background: var(--lp-bg-2, var(--noche-3));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--py-con) 16%, transparent);
+}
+
+.py-slider:hover::-webkit-slider-thumb,
+.py-slider:focus-visible::-webkit-slider-thumb {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--py-con) 24%, transparent);
+}
+
+.py-slider:focus-visible {
+  outline: none;
+}
+
+.py-slider:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--py-con) 24%, transparent);
+}
+
+.py-aviso {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px dashed color-mix(in srgb, var(--py-ink) 20%, transparent);
+  border-radius: var(--lp-radius-sm, var(--radio-sm));
+  font-size: 0.74rem;
+  line-height: 1.5;
+  color: var(--py-ink-3);
+}
+
+/* ------------------------------------------------------------ desglose */
+
+.py-desglose {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--py-linea);
+  padding-top: 16px;
+}
+
+.py-desglose div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.py-desglose dt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--py-ink-3);
+}
+
+.py-desglose dd {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--py-ink);
+}
+
+/* ------------------------------------------------------------ responsive */
+
+@media (max-width: 900px) {
+  .py-tablero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .py-proyeccion {
+    padding: 18px 16px;
+  }
+
+  .py-desglose {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  /* en pantallas angostas sobran las etiquetas intermedias del eje X */
+  .py-meses text:not(:last-of-type):nth-of-type(even) {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------ movimiento */
+
+@media (prefers-reduced-motion: reduce) {
+  .py-proyeccion *,
+  .py-proyeccion *::before,
+  .py-proyeccion *::after {
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+  }
+
+  .py-linea,
+  .py-linea--sin {
+    transition: none;
+  }
+
+  .py-area {
+    opacity: 1;
+  }
+
+  .py-punto {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Si el navegador no trae IntersectionObserver, el componente marca
+   `data-listo="si"` de entrada y todo queda visible. Si por lo que sea
+   el contenido nunca activa la animación, no se oculta nada crítico:
+   sólo los puntos fuera de su paso se ven pequeños. */

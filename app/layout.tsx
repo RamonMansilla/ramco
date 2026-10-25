@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Sora } from "next/font/google";
+import { cookies } from "next/headers";
 import "./globals.css";
+import "./temas.css";
+import { TEMA_COOKIE, temaValido } from "@/lib/temas";
 
 const display = Sora({
   subsets: ["latin"],
@@ -37,13 +40,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const store = await cookies();
+  const tema = temaValido(store.get(TEMA_COOKIE)?.value);
+
   return (
-    <html lang="es-CL" className={`${display.variable} ${sans.variable}`}>
+    <html
+      lang="es-CL"
+      data-theme={tema}
+      className={`${display.variable} ${sans.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

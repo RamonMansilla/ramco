@@ -4,6 +4,7 @@ import Link from "next/link";
 import "./landing.css";
 import { MAILTO, CORREO, SiteNav } from "@/components/landing/site-nav";
 import { ScrollReveal } from "@/components/landing/reveal";
+import { Proyeccion } from "@/components/grafico/proyeccion";
 import {
   IconArrowDown,
   IconArrowRight,
@@ -447,7 +448,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ------------------------------------------------------ 05 asesoría */}
+        {/* --------------------------------------------------- 05 asesoría */}
         <section
           className="lp-sec lp-sec--band"
           id="asesoria"
@@ -462,6 +463,7 @@ export default function HomePage() {
                   Servicio integral <span className="lp-grad">360°</span>
                 </>
               }
+              lead="No solo hacemos publicidad: también diseñamos, construimos y mantenemos el sitio donde esa publicidad convierte."
               titleId="asesoria-title"
             />
 
@@ -483,6 +485,29 @@ export default function HomePage() {
               ))}
             </div>
 
+            <div className="lp-servicios-bridge" data-reveal>
+              <div className="lp-servicios-bridge__text">
+                <h3>
+                  Además de la pauta: <span className="lp-grad">el sitio, la tienda y la app</span>
+                </h3>
+                <p>
+                  Creamos, mejoramos o reemplazamos la página de tu negocio. Si hoy corre en
+                  WordPress o WooCommerce y te tiene lento, parcheado y caro de mantener, lo
+                  llevamos a una solución a medida. Y también desarrollamos y publicamos
+                  aplicaciones para iOS y Android.
+                </p>
+              </div>
+              <div className="lp-servicios-bridge__actions">
+                <Link className="lp-btn lp-btn--primary" href="/servicios">
+                  Ver todos los servicios
+                  <IconArrowRight width={18} height={18} />
+                </Link>
+                <Link className="lp-btn lp-btn--ghost" href="/planes">
+                  Y los planes de web
+                </Link>
+              </div>
+            </div>
+
             <div className="lp-phases__footer">
               <div className="lp-close" data-reveal>
                 <p className="lp-close__text">
@@ -496,11 +521,25 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ------------------------------------------------------ 06 medición */}
-        <section className="lp-sec lp-sec--glow" id="medicion" aria-labelledby="medicion-title">
+        {/* --------------------------------------------------- 06 proyección */}
+        <section className="lp-sec" id="proyeccion" aria-labelledby="proyeccion-title">
           <div className="lp-shell">
             <SectionHead
               index="06"
+              label="PROYECCIÓN"
+              title="La diferencia de trabajar con RAMNCO"
+              lead="Compara tu ganancia estimada a 12 meses con y sin estrategia. Mueve los supuestos para verlo con los números de tu negocio."
+              titleId="proyeccion-title"
+            />
+            <Proyeccion />
+          </div>
+        </section>
+
+        {/* ------------------------------------------------------ 07 medición */}
+        <section className="lp-sec lp-sec--glow" id="medicion" aria-labelledby="medicion-title">
+          <div className="lp-shell">
+            <SectionHead
+              index="07"
               label="MEDICIÓN"
               title="Resultados que puedes ver"
               titleId="medicion-title"
@@ -542,7 +581,7 @@ export default function HomePage() {
             <div className="lp-final__box" data-reveal>
               <div className="lp-final__copy">
                 <p className="lp-kicker">
-                  <span className="lp-kicker__num">07</span>
+                  <span className="lp-kicker__num">08</span>
                   <span className="lp-kicker__sep" aria-hidden="true">
                     /
                   </span>

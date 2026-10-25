@@ -1,0 +1,216 @@
+/* =====================================================================
+   RAMNCO · temas de color
+   La landing usa variables `--lp-*` definidas en `app/landing.css`.
+   Cada tema redefine solo los colores; el resto del diseño no cambia.
+
+   Uso: `data-theme="<id>"` en <html>  ·  sin atributo = tema "nocturno".
+   ===================================================================== */
+
+/* 1. Noche creativa (tema original de la marca) */
+[data-theme="nocturno"] {
+  --border-strong: rgba(251, 251, 253, 0.16);
+}
+
+/* 2. Corporativo azul: pizarra profunda + azul institucional */
+[data-theme="corporativo"] {
+  --noche: #070d1a;
+  --noche-2: #0d1526;
+  --noche-3: #16233a;
+  --marca: #3b82f6;
+  --marca-2: #0ea5e9;
+  --verde: #3b82f6;
+  --verde-oscuro: #2563eb;
+  --blanco: #f7f9fc;
+  --gris: #b8c5d8;
+  --gris-2: #8194ad;
+  --azul: #0ea5e9;
+  --borde: rgba(247, 249, 252, 0.09);
+  --borde-fuerte: rgba(247, 249, 252, 0.17);
+  --sombra: 0 22px 60px rgba(3, 8, 20, 0.6);
+}
+
+[data-theme="corporativo"] .lp-page {
+  --lp-bg: #070d1a;
+  --lp-bg-2: #0a1224;
+  --lp-surface: rgba(16, 26, 45, 0.74);
+  --lp-purple: #3b82f6;
+  --lp-purple-soft: #b9d4ff;
+  --lp-blue: #0ea5e9;
+  --lp-blue-soft: #9fdcff;
+  --lp-ink: #f7f9fc;
+  --lp-ink-2: #b8c5d8;
+  --lp-ink-3: #8e9fb8;
+  --lp-line: rgba(247, 249, 252, 0.09);
+  --lp-line-2: rgba(247, 249, 252, 0.17);
+  --lp-grad: linear-gradient(102deg, #cfe2ff 0%, #4f9bff 36%, #3b82f6 68%, #0ea5e9 100%);
+  --lp-grad-btn: linear-gradient(102deg, #2563eb 0%, #2f7bf6 52%, #0ea5e9 100%);
+}
+
+/* 3. Esmeralda: grafito + verde financiero */
+[data-theme="esmeralda"] {
+  --noche: #06120f;
+  --noche-2: #0b1a16;
+  --noche-3: #132822;
+  --marca: #10b981;
+  --marca-2: #34d399;
+  --verde: #10b981;
+  --verde-oscuro: #059669;
+  --blanco: #f5fbf8;
+  --gris: #b4cec4;
+  --gris-2: #7d9c91;
+  --azul: #34d399;
+  --borde: rgba(245, 251, 248, 0.09);
+  --borde-fuerte: rgba(245, 251, 248, 0.17);
+  --sombra: 0 22px 60px rgba(2, 14, 10, 0.62);
+}
+
+[data-theme="esmeralda"] .lp-page {
+  --lp-bg: #06120f;
+  --lp-bg-2: #0a1814;
+  --lp-surface: rgba(16, 38, 32, 0.74);
+  --lp-purple: #10b981;
+  --lp-purple-soft: #a7f3d0;
+  --lp-blue: #34d399;
+  --lp-blue-soft: #9df0cf;
+  --lp-ink: #f5fbf8;
+  --lp-ink-2: #b4cec4;
+  --lp-ink-3: #89a89c;
+  --lp-line: rgba(245, 251, 248, 0.09);
+  --lp-line-2: rgba(245, 251, 248, 0.17);
+  --lp-grad: linear-gradient(102deg, #d1fae5 0%, #4ade9f 34%, #10b981 68%, #059669 100%);
+  --lp-grad-btn: linear-gradient(102deg, #059669 0%, #0ea878 50%, #34d399 100%);
+}
+
+/* 4. Índigo: azul profundo + violeta serio */
+[data-theme="indigo"] {
+  --noche: #080a1c;
+  --noche-2: #0e1230;
+  --noche-3: #171d45;
+  --marca: #6366f1;
+  --marca-2: #8b5cf6;
+  --verde: #6366f1;
+  --verde-oscuro: #4f46e5;
+  --blanco: #fafafd;
+  --gris: #c0c5e0;
+  --gris-2: #8b91b5;
+  --azul: #8b5cf6;
+  --borde: rgba(250, 250, 253, 0.09);
+  --borde-fuerte: rgba(250, 250, 253, 0.17);
+  --sombra: 0 22px 60px rgba(4, 5, 22, 0.62);
+}
+
+[data-theme="indigo"] .lp-page {
+  --lp-bg: #080a1c;
+  --lp-bg-2: #0b0e26;
+  --lp-surface: rgba(20, 24, 56, 0.74);
+  --lp-purple: #6366f1;
+  --lp-purple-soft: #c7c9ff;
+  --lp-blue: #8b5cf6;
+  --lp-blue-soft: #cbb8ff;
+  --lp-ink: #fafafd;
+  --lp-ink-2: #c0c5e0;
+  --lp-ink-3: #9298ba;
+  --lp-line: rgba(250, 250, 253, 0.09);
+  --lp-line-2: rgba(250, 250, 253, 0.17);
+  --lp-grad: linear-gradient(102deg, #e0e1ff 0%, #8b93ff 34%, #6366f1 68%, #8b5cf6 100%);
+  --lp-grad-btn: linear-gradient(102deg, #4f46e5 0%, #6366f1 52%, #8b5cf6 100%);
+}
+
+/* 5. Grafito: oscuro neutro, el más sobrio y corporativo */
+[data-theme="grafito"] {
+  --noche: #101215;
+  --noche-2: #171a1f;
+  --noche-3: #22262d;
+  --marca: #d4a853;
+  --marca-2: #b8935a;
+  --verde: #d4a853;
+  --verde-oscuro: #b8935a;
+  --blanco: #f6f7f9;
+  --gris: #c3c8cf;
+  --gris-2: #8d949d;
+  --azul: #7aa2d4;
+  --borde: rgba(246, 247, 249, 0.1);
+  --borde-fuerte: rgba(246, 247, 249, 0.18);
+  --sombra: 0 22px 60px rgba(0, 0, 0, 0.55);
+}
+
+[data-theme="grafito"] .lp-page {
+  --lp-bg: #101215;
+  --lp-bg-2: #14171b;
+  --lp-surface: rgba(30, 34, 40, 0.74);
+  --lp-purple: #d4a853;
+  --lp-purple-soft: #f0d9a8;
+  --lp-blue: #7aa2d4;
+  --lp-blue-soft: #b9d0e8;
+  --lp-ink: #f6f7f9;
+  --lp-ink-2: #c3c8cf;
+  --lp-ink-3: #939aa3;
+  --lp-line: rgba(246, 247, 249, 0.1);
+  --lp-line-2: rgba(246, 247, 249, 0.18);
+  --lp-grad: linear-gradient(102deg, #f5e6c4 0%, #e0bf7d 34%, #d4a853 68%, #a98a4e 100%);
+  --lp-grad-btn: linear-gradient(102deg, #b8935a 0%, #c9a463 52%, #d4a853 100%);
+}
+
+/* 6. Claro profesional: fondo claro para clientes que prefieren sobriedad */
+[data-theme="claro"] {
+  --noche: #f4f6f9;
+  --noche-2: #ffffff;
+  --noche-3: #e8edf4;
+  --marca: #1d4ed8;
+  --marca-2: #0f766e;
+  --verde: #1d4ed8;
+  --verde-oscuro: #1e40af;
+  --blanco: #0e1726;
+  --gris: #42506a;
+  --gris-2: #6b7a94;
+  --azul: #0f766e;
+  --borde: rgba(14, 23, 38, 0.12);
+  --borde-fuerte: rgba(14, 23, 38, 0.2);
+  --sombra: 0 18px 44px rgba(15, 28, 48, 0.12);
+  color-scheme: light;
+}
+
+[data-theme="claro"] body {
+  background: #f4f6f9;
+  color: #0e1726;
+}
+
+[data-theme="claro"] .lp-page {
+  --lp-bg: #f4f6f9;
+  --lp-bg-2: #ffffff;
+  --lp-surface: rgba(255, 255, 255, 0.9);
+  --lp-purple: #1d4ed8;
+  --lp-purple-soft: #1e40af;
+  --lp-blue: #0f766e;
+  --lp-blue-soft: #0d9488;
+  --lp-ink: #0e1726;
+  --lp-ink-2: #42506a;
+  --lp-ink-3: #6b7a94;
+  --lp-line: rgba(14, 23, 38, 0.1);
+  --lp-line-2: rgba(14, 23, 38, 0.18);
+  --lp-grad: linear-gradient(102deg, #1e40af 0%, #1d4ed8 46%, #0f766e 100%);
+  --lp-grad-btn: linear-gradient(102deg, #1e40af 0%, #1d4ed8 52%, #0f766e 100%);
+  color-scheme: light;
+  background: #f4f6f9;
+  color: #0e1726;
+}
+
+/* Ajustes del panel interno para los temas claros */
+[data-theme="claro"] .admin__bar {
+  background: rgba(255, 255, 255, 0.88);
+  border-bottom-color: rgba(14, 23, 38, 0.12);
+}
+
+[data-theme="claro"] .card,
+[data-theme="claro"] .kpi,
+[data-theme="claro"] .table-wrap {
+  background: #ffffff;
+  border-color: rgba(14, 23, 38, 0.12);
+}
+
+[data-theme="claro"] .input,
+[data-theme="claro"] .select,
+[data-theme="claro"] .textarea {
+  background: #ffffff;
+  color: #0e1726;
+}

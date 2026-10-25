@@ -1443,6 +1443,55 @@ main:focus {
   grid-template-columns: minmax(0, 1fr);
 }
 
+/* ------------------------------------------------- puente a /servicios y /planes */
+.lp-servicios-bridge {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+  margin-top: clamp(26px, 3.4vw, 44px);
+  padding: clamp(24px, 3vw, 36px);
+  border: 1px solid var(--lp-line-2);
+  border-radius: var(--lp-radius);
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--lp-purple) 16%, transparent), transparent 62%),
+    linear-gradient(180deg, rgba(22, 18, 44, 0.82), rgba(11, 9, 22, 0.82));
+}
+
+.lp-servicios-bridge__text h3 {
+  margin: 0 0 10px;
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+  letter-spacing: -0.02em;
+}
+
+.lp-servicios-bridge__text p {
+  margin: 0;
+  color: var(--lp-ink-2);
+  max-width: 62ch;
+}
+
+.lp-servicios-bridge__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.lp-servicios-bridge__actions .lp-btn {
+  white-space: nowrap;
+}
+
+@media (max-width: 780px) {
+  .lp-servicios-bridge {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lp-servicios-bridge__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
 /* ---------------------------------------------------------- medición */
 .lp-metrics {
   display: grid;

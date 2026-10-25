@@ -1,18 +1,25 @@
+import Link from "next/link";
+import { ThemePicker } from "@/components/theme-picker";
 import { IconClose, IconMenu } from "@/components/landing/icons";
 
 export const CORREO = "ramcochile@gmail.com";
 
 export const MAILTO = `mailto:${CORREO}`;
 
-const NAV_LINKS = [
-  { href: "#desafio", label: "Desafío" },
-  { href: "#metodo", label: "Método" },
-  { href: "#canales", label: "Canales" },
-  { href: "#medicion", label: "Medición" },
+const PAGINAS = [
+  { href: "/servicios", label: "Servicios" },
+  { href: "/planes", label: "Planes" },
+] as const;
+
+const SECCIONES = [
+  { href: "/#desafio", label: "Desafío" },
+  { href: "/#proyeccion", label: "Proyección" },
+  { href: "/#metodo", label: "Método" },
+  { href: "/#medicion", label: "Medición" },
 ] as const;
 
 /**
- * Navegación de la landing.
+ * Navegación global (se usa en todas las páginas públicas).
  * Server Component: el menú móvil es un `<details>` nativo, sin JavaScript.
  */
 export function SiteNav() {
@@ -23,7 +30,7 @@ export function SiteNav() {
       </a>
 
       <div className="lp-shell lp-header__inner">
-        <a className="lp-brand" href="#inicio" aria-label="RAMNCO Asesores, ir al inicio">
+        <Link className="lp-brand" href="/" aria-label="RAMNCO Asesores, ir al inicio">
           <span className="lp-brand__mark" aria-hidden="true">
             R
           </span>
@@ -31,10 +38,16 @@ export function SiteNav() {
             RAMNCO
             <span className="lp-brand__sub">ASESORES</span>
           </span>
-        </a>
+        </Link>
 
         <nav className="lp-nav" aria-label="Navegación principal">
-          {NAV_LINKS.map((link) => (
+          {PAGINAS.map((link) => (
+            <Link key={link.href} className="lp-nav__link" href={link.href}>
+              {link.label}
+              <span className="lp-nav__line" aria-hidden="true" />
+            </Link>
+          ))}
+          {SECCIONES.map((link) => (
             <a key={link.href} className="lp-nav__link" href={link.href}>
               {link.label}
               <span className="lp-nav__line" aria-hidden="true" />
@@ -43,6 +56,8 @@ export function SiteNav() {
         </nav>
 
         <div className="lp-header__actions">
+          <ThemePicker compacto />
+
           <a className="lp-btn lp-btn--ghost lp-btn--sm lp-header__cta" href={MAILTO}>
             Hablemos
           </a>
@@ -55,7 +70,12 @@ export function SiteNav() {
             </summary>
 
             <nav className="lp-menu__panel" aria-label="Navegación móvil">
-              {NAV_LINKS.map((link) => (
+              {PAGINAS.map((link) => (
+                <Link key={link.href} className="lp-menu__link" href={link.href}>
+                  {link.label}
+                </Link>
+              ))}
+              {SECCIONES.map((link) => (
                 <a key={link.href} className="lp-menu__link" href={link.href}>
                   {link.label}
                 </a>
