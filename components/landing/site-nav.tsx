@@ -1,19 +1,20 @@
-import Link from "next/link";
-import { IconClose, IconMenu } from "./icons";
-
-const NAV_LINKS = [
-  { href: "#servicios", label: "Servicios" },
-  { href: "#proceso", label: "Cómo trabajamos" },
-  { href: "#planes", label: "Planes" },
-  { href: "#porque", label: "Por qué RAMCO" },
-] as const;
+import { IconClose, IconMenu } from "@/components/landing/icons";
 
 export const CORREO = "ramcochile@gmail.com";
 
-export const MAILTO = `mailto:${CORREO}?subject=${encodeURIComponent(
-  "Quiero una propuesta de RAMCO",
-)}`;
+export const MAILTO = `mailto:${CORREO}`;
 
+const NAV_LINKS = [
+  { href: "#desafio", label: "Desafío" },
+  { href: "#metodo", label: "Método" },
+  { href: "#canales", label: "Canales" },
+  { href: "#medicion", label: "Medición" },
+] as const;
+
+/**
+ * Navegación de la landing.
+ * Server Component: el menú móvil es un `<details>` nativo, sin JavaScript.
+ */
 export function SiteNav() {
   return (
     <header className="lp-header">
@@ -21,51 +22,47 @@ export function SiteNav() {
         Saltar al contenido
       </a>
 
-      <div className="container">
-        <div className="landing-nav lp-header__bar">
-          <a className="lp-logo" href="#inicio" aria-label="RAMCO, volver al inicio">
-            <span className="lp-logo__mark" aria-hidden="true">
-              R
-            </span>
-            <span className="lp-logo__word">RAMCO</span>
+      <div className="lp-shell lp-header__inner">
+        <a className="lp-brand" href="#inicio" aria-label="RAMNCO Asesores, ir al inicio">
+          <span className="lp-brand__mark" aria-hidden="true">
+            R
+          </span>
+          <span className="lp-brand__word">
+            RAMNCO
+            <span className="lp-brand__sub">ASESORES</span>
+          </span>
+        </a>
+
+        <nav className="lp-nav" aria-label="Navegación principal">
+          {NAV_LINKS.map((link) => (
+            <a key={link.href} className="lp-nav__link" href={link.href}>
+              {link.label}
+              <span className="lp-nav__line" aria-hidden="true" />
+            </a>
+          ))}
+        </nav>
+
+        <div className="lp-header__actions">
+          <a className="lp-btn lp-btn--ghost lp-btn--sm lp-header__cta" href={MAILTO}>
+            Hablemos
           </a>
 
-          <nav className="landing-nav__links lp-header__links" aria-label="Navegación principal">
-            {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href}>
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="lp-header__actions">
-            <Link className="lp-header__panel" href="/admin">
-              Panel
-            </Link>
-            <a className="btn btn--primary btn--sm" href={MAILTO}>
-              Hablemos
-            </a>
-          </div>
-
-          {/* Menú móvil sin JavaScript: <details> nativo */}
           <details className="lp-menu">
             <summary className="lp-menu__toggle">
               <span className="sr-only">Abrir menú de navegación</span>
-              <IconMenu className="lp-menu__icon lp-menu__icon--open" />
-              <IconClose className="lp-menu__icon lp-menu__icon--closed" />
+              <IconMenu className="lp-menu__icon lp-menu__icon--open" width={20} height={20} />
+              <IconClose className="lp-menu__icon lp-menu__icon--close" width={20} height={20} />
             </summary>
+
             <nav className="lp-menu__panel" aria-label="Navegación móvil">
               {NAV_LINKS.map((link) => (
-                <a key={link.href} href={link.href}>
+                <a key={link.href} className="lp-menu__link" href={link.href}>
                   {link.label}
                 </a>
               ))}
-              <a className="lp-menu__cta btn btn--primary" href={MAILTO}>
+              <a className="lp-btn lp-btn--primary lp-menu__cta" href={MAILTO}>
                 Hablemos
               </a>
-              <Link className="lp-menu__panel-link" href="/admin">
-                Panel
-              </Link>
             </nav>
           </details>
         </div>

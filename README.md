@@ -1,36 +1,41 @@
-# RAMCO
+# RAMNCO
 
-**Servicios digitales: marketing y desarrollo web.** Empresa chilena, equipo de 4 personas.
+**Asesoría de publicidad estratégica.** Estrategia, pauta y optimización en Google Ads y Meta Ads
+para convertir inversión publicitaria en ventas medibles.
+
 Sitio público + panel interno + base de datos, en un solo proyecto.
 
 > **Contacto:** ramcochile@gmail.com · **Sitio:** pendiente de dominio (se publicará en Vercel)
-> **Instagram / redes:** pendiente de definir
+> **Fuente de contenido:** `RAMNCO_presentacion_comercial_visual_final.pptx` (presentación comercial 2026).
+> La landing se construye a partir de ese deck: mismo relato, mismos conceptos y misma estética
+> (noche violácea, púrpura `#B052FF`, azul `#3D82FF`).
 
 ## Qué hay acá
 
 | Parte | Ruta | Estado |
 |---|---|---|
-| Landing pública | `/` | En construcción |
+| Landing pública | `/` | Funcional, basada en la presentación comercial |
 | Panel interno (CRM ligero) | `/admin` | Funcional: leads, proyectos, cotizaciones, tareas |
 | Base de datos + login | Supabase | Creada y con RLS activo |
-| Material comercial DEVTING | `devting/` | Listo (marca, oferta, playbooks) |
+| Material comercial | `devting/` | Marca, oferta, guiones y playbooks |
 | Scripts de arranque y sync | `scripts/` | Listos |
 
 ## Stack
 
 - **Next.js 15** (App Router) + **TypeScript** + CSS propio → un solo despliegue para landing y panel.
-- **Supabase** (Postgres + Auth + RLS) → base de datos y usuarios del equipo, plan gratuito.
+- **Supabase** (Postgres + Auth + RLS) → base de datos y usuarios internos, plan gratuito.
 - **Vercel** → hosting del sitio y del panel, plan gratuito.
-- Sin dependencias de UI externas: el diseño vive en `app/globals.css`.
+- Tipografías con `next/font` (Sora para títulos, Inter para texto).
+- Sin dependencias de UI externas: el diseño vive en `app/globals.css` y `app/landing.css`.
 
 ## Estructura del repositorio
 
 ```
 app/
-  page.tsx              landing pública
+  page.tsx              landing pública (contenido de la presentación comercial)
   landing.css           estilos propios de la landing
-  globals.css           sistema de diseño (colores de marca, tarjetas, tablas, botones)
-  layout.tsx            layout raíz y metadatos
+  globals.css           sistema de diseño (paleta, tarjetas, tablas, botones)
+  layout.tsx            layout raíz, fuentes y metadatos
   admin/
     login/              acceso del equipo
     (panel)/            panel interno protegido
@@ -40,15 +45,11 @@ app/
       cotizaciones/     propuestas y su estado
       tareas/           pendientes del equipo
       actions.ts        Server Actions del panel
+components/
+  landing/              piezas de la landing (nav, iconos, animaciones)
 lib/
   supabase/             clientes de Supabase (servidor, navegador, middleware)
   auth.ts               guard de sesión (requireUser)
-  ui.ts                 tipos, etiquetas y formateadores compartidos
-supabase/
-  migrations/           esquema SQL (tablas, triggers, RLS)
-  seed.sql              datos de ejemplo opcionales
-devting/                marca, oferta, guiones y playbooks comerciales
-scripts/                arranque local, remoto y sincronización con GitHub
 ```
 
 ## Puesta en marcha
@@ -70,17 +71,17 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon public key>
 
 ## Panel interno
 
-- Entra en `/admin` con el correo de la empresa y la contraseña que se definió al crear el usuario.
-- **Crear usuarios del equipo:** Supabase → **Authentication → Users → Add user** (marca *Auto Confirm User*).
-  Cualquier usuario autenticado entra al panel; el equipo son 4 personas de confianza.
+- Entra en `/admin` con el correo de la empresa y la contraseña definida al crear el usuario.
+- **Crear usuarios:** Supabase → **Authentication → Users → Add user** (marca *Auto Confirm User*).
+  Cualquier usuario autenticado entra al panel; los permisos se administran desde Supabase.
 - Cada usuario nuevo obtiene su fila en `profiles` automáticamente (trigger `on_auth_user_created`).
 - Nadie sin sesión puede leer ni escribir en la base: todas las tablas tienen **RLS** activo
   y solo permiten `authenticated`.
 
 ### Roles
 
-`profiles.role`: `owner` (Ramon) · `admin` · `member`. Hoy todos tienen acceso completo;
-cuando el equipo crezca se pueden separar permisos por rol en las políticas RLS.
+`profiles.role`: `owner` · `admin` · `member`. Hoy todos tienen acceso completo;
+cuando haga falta, se pueden separar permisos por rol en las políticas RLS.
 
 ## Base de datos
 
@@ -90,8 +91,8 @@ Tablas: `profiles`, `leads`, `interactions`, `projects`, `quotes`, `tasks`, `act
 - Datos de ejemplo (opcional) en `supabase/seed.sql`.
 - Para aplicar cambios: pega el SQL en el **SQL Editor** de Supabase, o usa la CLI
   (`supabase db push`) cuando esté configurada.
-- El proyecto Supabase está en la región **us-west-2**. Si la latencia molesta al equipo
-  en Chile, más adelante se puede migrar a `sa-east-1` (São Paulo).
+- El proyecto Supabase está en la región **us-west-2**. Si la latencia molesta en Chile,
+  más adelante se puede migrar a `sa-east-1` (São Paulo).
 
 ## Ramas y scripts
 
@@ -118,7 +119,7 @@ corre `dev`/`start`; si no, abre la landing estática o ejecuta Python.
 2. Cargar las mismas dos variables de entorno en Vercel (Settings → Environment Variables).
 3. Cada push a `main` publica automáticamente. Los push a `main-local` generan *preview*.
 
-## Colaboración (equipo de 4)
+## Colaboración
 
 1. GitHub → repo → **Settings → Collaborators → Add people**.
 2. Invitar por usuario con rol **Write** (push) o **Maintain** (además issues/PRs).
@@ -130,10 +131,10 @@ corre `dev`/`start`; si no, abre la landing estática o ejecuta Python.
 
 - La `service_role` key de Supabase **no** se usa en la app; solo la `anon` (pública, limitada por RLS).
 - Tokens de GitHub guardados en el Administrador de credenciales de Windows, no en el repo.
-- Ante cualquier filtración: rotar token/contraseña en el proveedor y avisar al equipo.
+- Ante cualquier filtración: rotar token/contraseña en el proveedor y avisar.
 
 ## Contacto
 
 - Correo: ramcochile@gmail.com
 - Repositorio: <https://github.com/RamonMansilla/ramco>
-- Equipo: Ramon Mansilla (owner) + 3 integrantes por invitar
+- Owner: Ramon Mansilla

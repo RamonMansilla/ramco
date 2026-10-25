@@ -73,7 +73,7 @@ export default async function DashboardPage() {
         <div>
           <h1>Portada</h1>
           <p>
-            Hola {firstName}. Este es el estado de RAMCO hoy{" "}
+            Hola {firstName}. Este es el estado de RAMNCO hoy{" "}
             {new Intl.DateTimeFormat("es-CL", { dateStyle: "long" }).format(new Date())}.
           </p>
         </div>

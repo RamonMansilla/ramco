@@ -1,27 +1,30 @@
 /* =====================================================================
-   RAMCO · sistema de diseño
-   Azul noche #0B1020 · Verde #13D3A7 · Blanco #F8FAFC
-   Gris #98A2B3 · Azul acción #2563EB
+   RAMNCO · sistema de diseño
+   Noche #07060F · Púrpura #B052FF · Azul #3D82FF
+   Blanco #FBFBFD · Azul gris #BDC9DD · Pizarra #8192AE
    ===================================================================== */
 
 :root {
-  --noche: #0b1020;
-  --noche-2: #111832;
-  --noche-3: #1a2344;
-  --verde: #13d3a7;
-  --verde-oscuro: #0fae8b;
-  --blanco: #f8fafc;
-  --gris: #98a2b3;
-  --gris-2: #64748b;
-  --azul: #2563eb;
-  --rojo: #f87171;
-  --ambar: #fbbf24;
-  --borde: rgba(248, 250, 252, 0.1);
-  --borde-fuerte: rgba(248, 250, 252, 0.18);
-  --radio: 14px;
-  --radio-sm: 10px;
-  --sombra: 0 18px 40px rgba(3, 7, 18, 0.45);
-  --fuente: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --noche: #07060f;
+  --noche-2: #0d0b1a;
+  --noche-3: #151228;
+  --marca: #b052ff;
+  --marca-2: #3d82ff;
+  --verde: #b052ff;
+  --verde-oscuro: #9a3aea;
+  --blanco: #fbfbfd;
+  --gris: #bdc9dd;
+  --gris-2: #8192ae;
+  --azul: #3d82ff;
+  --rojo: #ff6b81;
+  --ambar: #ffc861;
+  --borde: rgba(251, 251, 253, 0.09);
+  --borde-fuerte: rgba(251, 251, 253, 0.16);
+  --radio: 16px;
+  --radio-sm: 11px;
+  --sombra: 0 22px 60px rgba(4, 2, 12, 0.6);
+  --fuente: var(--font-sans), "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --fuente-display: var(--font-display), var(--fuente);
 }
 
 * {
@@ -56,9 +59,11 @@ h1,
 h2,
 h3,
 h4 {
+  font-family: var(--fuente-display);
+  font-weight: 700;
   line-height: 1.15;
   margin: 0 0 0.5em;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 h1 {

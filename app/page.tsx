@@ -1,491 +1,607 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import "./landing.css";
-import { SiteNav, CORREO, MAILTO } from "@/components/landing/site-nav";
+import { MAILTO, CORREO, SiteNav } from "@/components/landing/site-nav";
+import { ScrollReveal } from "@/components/landing/reveal";
 import {
+  IconArrowDown,
   IconArrowRight,
-  IconBolt,
+  IconAudience,
   IconChart,
-  IconCheck,
-  IconClock,
-  IconCode,
+  IconClipboard,
+  IconCompass,
+  IconEye,
+  IconGauge,
+  IconLayers,
   IconMail,
-  IconPen,
-  IconShield,
-  IconUsers,
-  IconWeb,
+  IconRefresh,
+  IconSearch,
+  IconTarget,
+  IconUserPlus,
+  IconWallet,
 } from "@/components/landing/icons";
 
 export const metadata: Metadata = {
-  title: "Tecnología que vende. Marketing que convierte.",
+  title: { absolute: "RAMNCO · Publicidad que convierte en ventas" },
   description:
-    "RAMCO diseña y programa sitios web, landing pages y automatizaciones para pymes chilenas. Marketing medible, entregas en 5 a 7 días y planes desde CLP 180.000.",
+    "RAMNCO es una asesoría de publicidad estratégica en Chile: estrategia, pauta y optimización en Google Ads y Meta Ads, con reportes claros y control real de la inversión.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "RAMCO · Tecnología que vende. Marketing que convierte.",
+    title: "RAMNCO · Publicidad que convierte en ventas",
     description:
-      "Sitios web, landing pages, automatización y campañas para pymes chilenas. Planes desde CLP 180.000, con entrega en 5 a 7 días.",
+      "Estrategia, pauta y optimización para hacer crecer tu negocio. Google Ads + Meta Ads con reportes claros y métricas que puedes ver.",
     locale: "es_CL",
     type: "website",
   },
 };
 
-const SERVICIOS = [
+/* ------------------------------------------------------------------ datos */
+
+const KEYWORDS = ["Google Ads", "Meta Ads", "Performance", "Conversión", "Datos"] as const;
+
+const DESAFIOS = [
   {
-    icon: IconWeb,
-    label: "Sitios y landing pages",
-    titulo: "Sitios web y landing pages",
-    texto:
-      "Diseñamos y programamos páginas rápidas en Next.js, responsivas y fáciles de actualizar. Cada sección responde una duda y lleva a la persona a contactarte.",
+    num: "01",
+    tag: "VISIBILIDAD",
+    icon: IconEye,
+    titulo: "Alcance sin intención",
+    texto: "Llegas a personas que no buscan tu solución.",
   },
   {
-    icon: IconBolt,
-    label: "Automatización",
-    titulo: "Automatización de procesos",
-    texto:
-      "Formularios inteligentes, respuestas automáticas, registro de leads y avisos por correo. Menos copiar y pegar, más tiempo para vender.",
+    num: "02",
+    tag: "INVERSIÓN",
+    icon: IconWallet,
+    titulo: "Presupuesto sin control",
+    texto: "No sabes qué anuncios generan oportunidades.",
   },
   {
-    icon: IconPen,
-    label: "Contenido y redes",
-    titulo: "Contenido y redes",
-    texto:
-      "Textos comerciales y piezas alineadas con tu oferta. Las redes atraen atención; tu web ordena la oferta y cierra la consulta.",
-  },
-  {
-    icon: IconChart,
-    label: "Datos y analítica",
-    titulo: "Datos y analítica",
-    texto:
-      "Medición desde el día uno: eventos de contacto, origen de las consultas y un reporte simple para decidir qué ajustar.",
+    num: "03",
+    tag: "EJECUCIÓN",
+    icon: IconGauge,
+    titulo: "Decisiones tardías",
+    texto: "Sin medición, optimizar toma demasiado tiempo.",
   },
 ] as const;
 
 const PASOS = [
   {
     num: "01",
-    titulo: "Diagnóstico sin costo",
-    texto:
-      "Revisamos tu oferta, tus canales y cómo te contactan hoy. Definimos qué necesita convertir y dónde se pierden las consultas.",
+    icon: IconCompass,
+    titulo: "Estrategia",
+    texto: "Objetivos, oferta y audiencia.",
   },
   {
     num: "02",
-    titulo: "Propuesta por escrito",
-    texto:
-      "Alcance, plazos y precio fijo. Sabes exactamente qué recibes y cuándo, antes de pagar nada.",
+    icon: IconLayers,
+    titulo: "Campañas",
+    texto: "Google Ads y Meta Ads.",
   },
   {
     num: "03",
-    titulo: "Diseño y desarrollo",
-    texto:
-      "Primer borrador en días, no semanas. Ajustamos diseño y textos contigo hasta que apruebes.",
-  },
-  {
-    num: "04",
-    titulo: "Lanzamiento y medición",
-    texto:
-      "Publicamos con tu dominio, activamos la medición y revisamos juntos cómo responden los primeros contactos.",
+    icon: IconRefresh,
+    titulo: "Mejora",
+    texto: "Revisión constante de datos.",
   },
 ] as const;
 
-const PLANES = [
+const CANALES = [
   {
-    nombre: "Presencia Digital Express",
-    para: "Para negocios que necesitan verse profesionales rápido.",
-    desde: "CLP 180.000",
-    hasta: "hasta CLP 350.000",
-    nota: "",
-    etiqueta: "Ideal para empezar",
-    destacado: true,
-    incluye: [
-      "Landing page de una página con servicios, beneficios y contacto",
-      "Copy comercial enfocado en venta",
-      "Botón directo a WhatsApp",
-      "Optimización básica de Instagram o LinkedIn",
-      "Entrega en 5 a 7 días",
-    ],
+    nombre: "GOOGLE ADS",
+    claim: "Captura demanda activa",
+    texto:
+      "Aparece cuando tus clientes buscan productos o servicios como los tuyos.",
+    icon: IconSearch,
+    modifier: "lp-channel--google",
   },
   {
-    nombre: "Sistema de Captación",
-    para: "Para recibir consultas de forma constante, no por rachas.",
-    desde: "CLP 450.000",
-    hasta: "hasta CLP 850.000",
-    nota: "+ inversión publicitaria",
-    etiqueta: "",
-    destacado: false,
-    incluye: [
-      "Landing optimizada para conversión",
-      "Formulario o WhatsApp con mensaje prearmado",
-      "Pixel y medición básica de resultados",
-      "Primera campaña de Meta Ads o Google Ads",
-      "8 piezas de contenido",
-      "Reporte mensual simple",
-    ],
-  },
-  {
-    nombre: "Automatización y Web",
-    para: "Para negocios que pierden horas respondiendo y cotizando a mano.",
-    desde: "CLP 700.000",
-    hasta: "hasta CLP 1.500.000",
-    nota: "",
-    etiqueta: "",
-    destacado: false,
-    incluye: [
-      "Sitio o mini sistema web a medida",
-      "Formulario inteligente y base de datos de prospectos",
-      "Automatización de respuestas",
-      "Integración con correo, WhatsApp o planilla",
-      "Capacitación para tu equipo",
-    ],
+    nombre: "META ADS",
+    claim: "Genera demanda",
+    texto:
+      "Llega a audiencias relevantes con anuncios visuales y segmentados.",
+    icon: IconAudience,
+    modifier: "lp-channel--meta",
   },
 ] as const;
 
-const BENEFICIOS = [
+const FASES = [
   {
-    icon: IconUsers,
-    titulo: "Equipo pequeño, trato directo",
-    texto:
-      "Hablas con quienes diseñan y programan tu proyecto. Sin intermediarios ni ejecutivos que nunca abren el archivo.",
+    etiqueta: "FASE 1",
+    indice: "1",
+    titulo: "Diseño de estrategia",
+    texto: "Definimos objetivos, público y propuesta comercial.",
   },
   {
-    icon: IconCode,
-    titulo: "Diseño y código propios",
-    texto:
-      "Nada de plantillas genéricas: el sitio queda a tu nombre, con tu dominio y sin dependencias raras.",
+    etiqueta: "FASE 2",
+    indice: "2",
+    titulo: "Implementación",
+    texto: "Creamos campañas, anuncios y medición.",
   },
   {
-    icon: IconBolt,
-    titulo: "Velocidad como prioridad",
-    texto:
-      "Sitios livianos y optimizados. La mayoría de tus visitas llega desde el celular y ahí tiene que cargar rápido.",
-  },
-  {
-    icon: IconClock,
-    titulo: "Plazos por escrito",
-    texto:
-      "Cada proyecto tiene fecha de entrega definida en la propuesta. Si algo se corre, te avisamos antes, no después.",
-  },
-  {
-    icon: IconChart,
-    titulo: "Medición desde el día uno",
-    texto:
-      "Analítica y eventos de contacto configurados desde el inicio, para saber cuántas consultas genera la web.",
-  },
-  {
-    icon: IconShield,
-    titulo: "Acompañamiento al entregar",
-    texto:
-      "Ajustes menores y soporte incluidos las primeras semanas. No te dejamos solo con una carpeta comprimida.",
+    etiqueta: "FASE 3",
+    indice: "3",
+    titulo: "Optimización",
+    texto: "Revisamos resultados y ajustamos la inversión.",
   },
 ] as const;
 
-const GARANTIAS = [
-  "Primer borrador a revisión: si no te convence, no seguimos y no pagas el resto.",
-  "Pago 50% al iniciar y 50% al entregar, sin permanencia ni cobros automáticos.",
-  "Todo por escrito: alcance, plazos y precio antes de empezar.",
+const METRICAS = [
+  {
+    num: "1",
+    titulo: "Leads",
+    texto: "Oportunidades generadas",
+  },
+  {
+    num: "2",
+    titulo: "Conversión",
+    texto: "Rendimiento por campaña",
+  },
+  {
+    num: "3",
+    titulo: "Inversión",
+    texto: "Control por canal",
+  },
 ] as const;
+
+const PANEL_METRICAS = [
+  { label: "Leads", icon: IconUserPlus },
+  { label: "Conversión", icon: IconTarget },
+  { label: "Inversión", icon: IconChart },
+] as const;
+
+/* ----------------------------------------------------------- piezas locales */
+
+function SectionHead({
+  index,
+  label,
+  title,
+  lead,
+  titleId,
+}: {
+  index: string;
+  label: string;
+  title: ReactNode;
+  lead?: string;
+  titleId: string;
+}) {
+  return (
+    <header className="lp-sec__head" data-reveal data-delay="0">
+      <div className="lp-sec__intro">
+        <p className="lp-kicker">
+          <span className="lp-kicker__num">{index}</span>
+          <span className="lp-kicker__sep" aria-hidden="true">
+            /
+          </span>
+          <span className="lp-kicker__label">{label}</span>
+        </p>
+        <h2 className="lp-h2" id={titleId}>
+          {title}
+        </h2>
+      </div>
+      {lead ? <p className="lp-sec__lead">{lead}</p> : null}
+    </header>
+  );
+}
+
+/* ---------------------------------------------------------------- página */
 
 export default function HomePage() {
   return (
-    <>
+    <div className="lp-page">
       <SiteNav />
+      <ScrollReveal />
 
       <main id="contenido" tabIndex={-1}>
-        {/* ------------------------------------------------------------- hero */}
-        <section className="hero" id="inicio" aria-labelledby="hero-titulo">
-          <div className="container">
-            <div className="lp-hero">
-              <div className="lp-hero__text">
-                <span className="eyebrow">Marketing + desarrollo web · Chile</span>
-                <h1 id="hero-titulo">
-                  Tecnología que <span className="lp-accent">vende</span>.
-                  <br />
-                  Marketing que <span className="lp-accent">convierte</span>.
-                </h1>
-                <p className="lead">
-                  Somos RAMCO: un equipo chileno de cuatro personas que diseña, programa y mide
-                  sitios web pensados para que tu negocio reciba consultas reales, no solo visitas.
-                </p>
-                <div className="hero__actions">
-                  <a className="btn btn--primary" href={MAILTO}>
-                    Hablemos de tu proyecto
-                    <IconArrowRight width={18} height={18} />
-                  </a>
-                  <a className="btn btn--ghost" href="#planes">
-                    Ver planes y precios
-                  </a>
-                </div>
-                <ul className="lp-facts" aria-label="Condiciones de trabajo">
-                  <li>
-                    <IconClock width={17} height={17} />
-                    Entrega en 5 a 7 días
-                  </li>
-                  <li>
-                    <IconShield width={17} height={17} />
-                    50% al iniciar, 50% al entregar
-                  </li>
-                  <li>
-                    <IconCode width={17} height={17} />
-                    Código y dominio tuyos
-                  </li>
-                </ul>
+        {/* ------------------------------------------------------------ hero */}
+        <section className="lp-hero" id="inicio" aria-labelledby="hero-title">
+          <div className="lp-hero__bg" aria-hidden="true">
+            <span className="lp-blob lp-blob--a" />
+            <span className="lp-blob lp-blob--b" />
+            <span className="lp-blob lp-blob--c" />
+            <span className="lp-hero__grid" />
+            <span className="lp-hero__noise" />
+          </div>
+
+          <div className="lp-shell lp-hero__inner">
+            <div className="lp-hero__copy">
+              <p className="lp-eyebrow">
+                <span className="lp-eyebrow__dot" aria-hidden="true" />
+                PUBLICIDAD ESTRATÉGICA · 2026
+              </p>
+
+              <h1 className="lp-h1" id="hero-title">
+                Publicidad que{" "}
+                <span className="lp-grad lp-grad--live">convierte en ventas</span>
+              </h1>
+
+              <p className="lp-hero__lead">
+                Estrategia, pauta y optimización para hacer crecer tu negocio.
+              </p>
+
+              <div className="lp-hero__actions">
+                <a className="lp-btn lp-btn--primary" href={MAILTO}>
+                  Agenda tu diagnóstico
+                  <IconArrowRight width={18} height={18} />
+                </a>
+                <a className="lp-btn lp-btn--ghost" href="#metodo">
+                  Ver el método
+                  <IconArrowDown width={18} height={18} />
+                </a>
               </div>
 
-              <aside className="card lp-offer" aria-labelledby="oferta-titulo">
-                <span className="badge badge--verde">Oferta de lanzamiento</span>
-                <h2 id="oferta-titulo" className="lp-offer__title">
-                  Landing profesional desde
-                </h2>
-                <p className="lp-offer__price">
-                  CLP 180.000
-                  <span className="lp-offer__price-note">pago único</span>
-                </p>
-                <ul className="lp-offer__list">
-                  <li>
-                    <IconCheck width={16} height={16} />
-                    Landing page de una página
-                  </li>
-                  <li>
-                    <IconCheck width={16} height={16} />
-                    Textos comerciales incluidos
-                  </li>
-                  <li>
-                    <IconCheck width={16} height={16} />
-                    Botón directo a WhatsApp
-                  </li>
-                  <li>
-                    <IconCheck width={16} height={16} />
-                    Optimización básica de tus redes
-                  </li>
+              <p className="lp-hero__meta">
+                <span>Google Ads</span>
+                <span className="lp-hero__meta-sep" aria-hidden="true">
+                  ·
+                </span>
+                <span>Meta Ads</span>
+                <span className="lp-hero__meta-sep" aria-hidden="true">
+                  ·
+                </span>
+                <span>Reportes claros</span>
+              </p>
+            </div>
+
+            <div className="lp-hero__panel">
+              <aside className="lp-panel" aria-label="Panel de campaña de ejemplo">
+                <div className="lp-panel__bar">
+                  <span className="lp-panel__brand">RAMNCO / CRECIMIENTO DIGITAL</span>
+                  <span className="lp-panel__flag">EJEMPLO</span>
+                </div>
+
+                <div className="lp-panel__head">
+                  <p className="lp-panel__title">Panel de campaña</p>
+                  <span className="lp-panel__live">
+                    <span className="lp-dot" aria-hidden="true" />
+                    Vista de ejemplo
+                  </span>
+                </div>
+
+                <ul className="lp-panel__metrics">
+                  {PANEL_METRICAS.map((metrica) => {
+                    const Icon = metrica.icon;
+                    return (
+                      <li className="lp-panel__metric" key={metrica.label}>
+                        <span className="lp-panel__metric-name">
+                          <Icon width={15} height={15} />
+                          {metrica.label}
+                        </span>
+                        <span className="lp-panel__track" aria-hidden="true">
+                          <span className="lp-panel__fill" />
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ul>
-                <a className="btn btn--ghost lp-offer__btn" href="#planes">
-                  Ver qué incluye
-                </a>
+
+                <ul className="lp-panel__chips">
+                  <li>Google Ads</li>
+                  <li>Meta Ads</li>
+                </ul>
+
+                <p className="lp-panel__note">Esquema de ejemplo. Sin cifras reales.</p>
               </aside>
             </div>
           </div>
         </section>
 
-        {/* --------------------------------------------------------- servicios */}
-        <section className="section" id="servicios" aria-labelledby="servicios-titulo">
-          <div className="container">
-            <span className="eyebrow">Servicios</span>
-            <h2 id="servicios-titulo">Cuatro piezas, un mismo objetivo: que te contacten.</h2>
-            <p className="lead lp-section-lead">
-              No vendemos páginas bonitas sueltas. Armamos un sistema simple donde el sitio, el
-              contenido, la automatización y la medición trabajan juntos.
-            </p>
+        {/* --------------------------------------------------------- marquee */}
+        <div className="lp-marquee" aria-hidden="true">
+          <div className="lp-marquee__track">
+            {[0, 1].map((copy) => (
+              <div className="lp-marquee__group" key={copy}>
+                {KEYWORDS.map((keyword) => (
+                  <span className="lp-marquee__item" key={`${copy}-${keyword}`}>
+                    {keyword}
+                    <span className="lp-marquee__spark">✦</span>
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
 
-            <div className="grid grid--3 lp-services">
-              {SERVICIOS.map((servicio) => {
-                const Icon = servicio.icon;
+        {/* ------------------------------------------------------ 02 desafío */}
+        <section className="lp-sec" id="desafio" aria-labelledby="desafio-title">
+          <div className="lp-shell">
+            <SectionHead
+              index="02"
+              label="EL DESAFÍO"
+              title="Crecer sin desperdiciar presupuesto"
+              lead="La pauta sin una estrategia clara suele generar tráfico, pero no ventas."
+              titleId="desafio-title"
+            />
+
+            <div className="lp-grid lp-grid--3">
+              {DESAFIOS.map((desafio, index) => {
+                const Icon = desafio.icon;
                 return (
-                  <article className="feature lp-service" key={servicio.titulo}>
-                    <span className="feature__icon" role="img" aria-label={servicio.label}>
-                      <Icon width={20} height={20} />
-                    </span>
-                    <h3>{servicio.titulo}</h3>
-                    <p className="muted">{servicio.texto}</p>
+                  <article
+                    className="lp-card lp-challenge"
+                    key={desafio.tag}
+                    data-reveal
+                    data-delay={index}
+                  >
+                    <div className="lp-challenge__top">
+                      <span className="lp-challenge__tag">
+                        <span className="lp-challenge__num">{desafio.num}</span>
+                        <span aria-hidden="true">·</span>
+                        {desafio.tag}
+                      </span>
+                      <span className="lp-card__icon">
+                        <Icon width={20} height={20} />
+                      </span>
+                    </div>
+                    <h3>{desafio.titulo}</h3>
+                    <p>{desafio.texto}</p>
                   </article>
                 );
               })}
             </div>
-          </div>
-        </section>
 
-        {/* ------------------------------------------------------------ proceso */}
-        <section
-          className="section lp-band"
-          id="proceso"
-          aria-labelledby="proceso-titulo"
-        >
-          <div className="container">
-            <span className="eyebrow">Cómo trabajamos</span>
-            <h2 id="proceso-titulo">Un proceso corto, con fechas y sin sorpresas.</h2>
-            <p className="lead lp-section-lead">
-              Cuatro pasos, de la primera conversación al sitio publicado. Cada uno con un
-              entregable concreto.
-            </p>
-
-            <div className="grid grid--4 lp-steps">
-              {PASOS.map((paso) => (
-                <div className="step lp-step" key={paso.num}>
-                  <span className="step__num">{paso.num}</span>
-                  <h3>{paso.titulo}</h3>
-                  <p className="muted">{paso.texto}</p>
-                </div>
-              ))}
+            <div className="lp-close" data-reveal>
+              <p className="lp-close__text">
+                RAMNCO convierte inversión publicitaria en una{" "}
+                <em>operación medible</em>.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* ------------------------------------------------------------- planes */}
-        <section className="section" id="planes" aria-labelledby="planes-titulo">
-          <div className="container">
-            <span className="eyebrow">Planes</span>
-            <h2 id="planes-titulo">Precios en pesos chilenos, claros desde el inicio.</h2>
-            <p className="lead lp-section-lead">
-              Rangos de referencia según alcance. El valor final se fija en la propuesta, después
-              del diagnóstico y sin costo por cotizar.
-            </p>
+        {/* -------------------------------------------------------- 03 método */}
+        <section
+          className="lp-sec lp-sec--band"
+          id="metodo"
+          aria-labelledby="metodo-title"
+        >
+          <div className="lp-shell">
+            <SectionHead
+              index="03"
+              label="MÉTODO"
+              title="Cómo atraemos clientes"
+              lead="Conectamos la intención de búsqueda con campañas que generan demanda."
+              titleId="metodo-title"
+            />
 
-            <div className="grid grid--3 lp-plans">
-              {PLANES.map((plan) => (
-                <article
-                  className={`card lp-plan${plan.destacado ? " lp-plan--destacado" : ""}`}
-                  key={plan.nombre}
-                >
-                  <div className="lp-plan__head">
-                    {plan.etiqueta ? (
-                      <span className="badge badge--verde">{plan.etiqueta}</span>
-                    ) : null}
-                    <h3>{plan.nombre}</h3>
-                    <p className="muted lp-plan__para">{plan.para}</p>
-                  </div>
-
-                  <p className="lp-plan__price">
-                    <span className="lp-plan__desde">{plan.desde}</span>
-                    <span className="lp-plan__hasta">{plan.hasta}</span>
-                    {plan.nota ? <span className="lp-plan__nota">{plan.nota}</span> : null}
-                  </p>
-
-                  <ul className="lp-plan__features">
-                    {plan.incluye.map((item) => (
-                      <li key={item}>
-                        <IconCheck width={16} height={16} />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <a
-                    className={`btn ${plan.destacado ? "btn--primary" : "btn--ghost"} lp-plan__btn`}
-                    href={MAILTO}
+            <ol className="lp-timeline">
+              {PASOS.map((paso, index) => {
+                const Icon = paso.icon;
+                return (
+                  <li
+                    className="lp-timeline__item"
+                    key={paso.num}
+                    data-reveal
+                    data-delay={index}
                   >
-                    Pedir propuesta
-                  </a>
+                    <span className="lp-timeline__node" aria-hidden="true">
+                      {paso.num}
+                    </span>
+                    <div className="lp-timeline__body">
+                      <span className="lp-timeline__icon">
+                        <Icon width={18} height={18} />
+                      </span>
+                      <h3>{paso.titulo}</h3>
+                      <p>{paso.texto}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+
+            <div className="lp-close" data-reveal>
+              <p className="lp-close__text">
+                Más control sobre <em>cada peso invertido</em>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ------------------------------------------------------- 04 canales */}
+        <section className="lp-sec" id="canales" aria-labelledby="canales-title">
+          <div className="lp-shell">
+            <SectionHead
+              index="04"
+              label="CANALES"
+              title={
+                <>
+                  Google Ads <span className="lp-plus">+</span> Meta Ads
+                </>
+              }
+              lead="Dos canales, una misma estrategia comercial."
+              titleId="canales-title"
+            />
+
+            <div className="lp-canales">
+              {CANALES.map((canal) => {
+                const Icon = canal.icon;
+                return (
+                  <article
+                    className={`lp-card lp-channel ${canal.modifier}`}
+                    key={canal.nombre}
+                    data-reveal
+                  >
+                    <header className="lp-channel__head">
+                      <span className="lp-channel__icon">
+                        <Icon width={22} height={22} />
+                      </span>
+                      <h3 className="lp-channel__name">{canal.nombre}</h3>
+                    </header>
+                    <p className="lp-channel__claim">{canal.claim}</p>
+                    <p className="lp-channel__text">{canal.texto}</p>
+                  </article>
+                );
+              })}
+              <span className="lp-canales__join" aria-hidden="true">
+                +
+              </span>
+            </div>
+
+            <div className="lp-close lp-close--sm" data-reveal>
+              <p className="lp-close__text">
+                La combinación permite atraer, convertir y volver a impactar a tus
+                potenciales clientes.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ------------------------------------------------------ 05 asesoría */}
+        <section
+          className="lp-sec lp-sec--band"
+          id="asesoria"
+          aria-labelledby="asesoria-title"
+        >
+          <div className="lp-shell">
+            <SectionHead
+              index="05"
+              label="ASESORÍA RAMNCO"
+              title={
+                <>
+                  Servicio integral <span className="lp-grad">360°</span>
+                </>
+              }
+              titleId="asesoria-title"
+            />
+
+            <div className="lp-phases">
+              {FASES.map((fase, index) => (
+                <article
+                  className="lp-card lp-phase"
+                  key={fase.etiqueta}
+                  data-reveal
+                  data-delay={index}
+                >
+                  <span className="lp-phase__index" aria-hidden="true">
+                    {fase.indice}
+                  </span>
+                  <span className="lp-phase__label">{fase.etiqueta}</span>
+                  <h3>{fase.titulo}</h3>
+                  <p>{fase.texto}</p>
                 </article>
               ))}
             </div>
 
-            <p className="dim lp-plans__note">
-              Valores en CLP como referencia inicial. La inversión publicitaria de los planes con
-              campañas se paga directo a Meta o Google. Forma de pago: 50% al iniciar y 50% al
-              entregar.
-            </p>
-          </div>
-        </section>
-
-        {/* ------------------------------------------------------------ por qué */}
-        <section className="section lp-band" id="porque" aria-labelledby="porque-titulo">
-          <div className="container">
-            <span className="eyebrow">Por qué RAMCO</span>
-            <h2 id="porque-titulo">Somos cuatro. Eso juega a tu favor.</h2>
-            <p className="lead lp-section-lead">
-              Un equipo chico significa decisiones rápidas, trato directo y nadie que te venda
-              cosas que no vamos a construir.
-            </p>
-
-            <div className="grid grid--3 lp-beneficios">
-              {BENEFICIOS.map((beneficio) => {
-                const Icon = beneficio.icon;
-                return (
-                  <article className="lp-beneficio" key={beneficio.titulo}>
-                    <span className="lp-beneficio__icon" aria-hidden="true">
-                      <Icon width={18} height={18} />
-                    </span>
-                    <h3>{beneficio.titulo}</h3>
-                    <p className="muted">{beneficio.texto}</p>
-                  </article>
-                );
-              })}
-            </div>
-
-            <div className="card lp-garantias" aria-labelledby="garantias-titulo">
-              <h3 id="garantias-titulo" className="lp-garantias__title">
-                <IconShield width={20} height={20} />
-                Garantías de trabajo
-              </h3>
-              <ul className="lp-garantias__list">
-                {GARANTIAS.map((garantia) => (
-                  <li key={garantia}>
-                    <IconCheck width={16} height={16} />
-                    <span>{garantia}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="lp-phases__footer">
+              <div className="lp-close" data-reveal>
+                <p className="lp-close__text">
+                  Una sola asesoría para administrar y mejorar toda tu pauta digital.
+                </p>
+              </div>
+              <p className="lp-note" data-reveal>
+                Acompañamiento desde la planificación hasta el reporte de resultados.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* ---------------------------------------------------------------- cta */}
-        <section className="section lp-cta" id="contacto" aria-labelledby="contacto-titulo">
-          <div className="container">
-            <div className="lp-cta__box">
-              <div className="lp-cta__text">
-                <span className="eyebrow">Empecemos</span>
-                <h2 id="contacto-titulo">
-                  Conversemos. Te enviamos 3 mejoras concretas para tu presencia digital.
+        {/* ------------------------------------------------------ 06 medición */}
+        <section className="lp-sec lp-sec--glow" id="medicion" aria-labelledby="medicion-title">
+          <div className="lp-shell">
+            <SectionHead
+              index="06"
+              label="MEDICIÓN"
+              title="Resultados que puedes ver"
+              titleId="medicion-title"
+            />
+
+            <div className="lp-metrics">
+              {METRICAS.map((metrica, index) => (
+                <article
+                  className="lp-metric"
+                  key={metrica.titulo}
+                  data-reveal
+                  data-delay={index}
+                >
+                  <span className="lp-metric__num">{metrica.num}</span>
+                  <div className="lp-metric__body">
+                    <h3>{metrica.titulo}</h3>
+                    <p>{metrica.texto}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <p className="lp-measure" data-reveal>
+              Seguimiento claro para tomar decisiones con información real.
+            </p>
+
+            <blockquote className="lp-manifesto" data-reveal>
+              <p className="lp-manifesto__text">
+                <span className="lp-grad">Sin promesas vacías</span>: reportes simples,
+                métricas claras y mejoras continuas.
+              </p>
+            </blockquote>
+          </div>
+        </section>
+
+        {/* --------------------------------------------------- 07 próximo paso */}
+        <section className="lp-final" id="contacto" aria-labelledby="proximo-title">
+          <div className="lp-shell">
+            <div className="lp-final__box" data-reveal>
+              <div className="lp-final__copy">
+                <p className="lp-kicker">
+                  <span className="lp-kicker__num">07</span>
+                  <span className="lp-kicker__sep" aria-hidden="true">
+                    /
+                  </span>
+                  <span className="lp-kicker__label">PRÓXIMO PASO</span>
+                </p>
+
+                <h2 className="lp-h2" id="proximo-title">
+                  Hablemos de tu crecimiento
                 </h2>
-                <p className="lead">
-                  Sin costo y sin compromiso: revisamos tu web o tu Instagram y te decimos qué
-                  cambiar primero. Si no aplica a tu negocio, te lo decimos también.
+
+                <p className="lp-sec__lead">
+                  Agenda una conversación para revisar tu situación y tus oportunidades de
+                  pauta.
                 </p>
+
+                <a className="lp-btn lp-btn--primary lp-btn--caps" href={MAILTO}>
+                  CONTACTAR
+                  <IconArrowRight width={18} height={18} />
+                </a>
               </div>
-              <div className="lp-cta__actions">
-                <a className="btn btn--primary lp-cta__mail" href={MAILTO}>
-                  <IconMail width={18} height={18} />
-                  Escribir a {CORREO}
-                </a>
-                <a className="btn btn--ghost" href="#planes">
-                  Revisar planes
-                </a>
-                <p className="dim lp-cta__hint">
-                  Atención directa del equipo, de lunes a viernes.
+
+              <aside className="lp-diagnostico" aria-label="Diagnóstico inicial">
+                <span className="lp-diagnostico__icon" aria-hidden="true">
+                  <IconClipboard width={22} height={22} />
+                </span>
+                <h3 className="lp-diagnostico__label">Diagnóstico inicial</h3>
+                <p className="lp-diagnostico__text">
+                  Revisamos objetivos, canales y próximos pasos.
                 </p>
-              </div>
+              </aside>
             </div>
           </div>
         </section>
       </main>
 
-      {/* ------------------------------------------------------------- footer */}
-      <footer className="footer">
-        <div className="container">
-          <div className="lp-footer">
-            <div className="lp-footer__brand">
-              <a className="lp-logo" href="#inicio" aria-label="RAMCO, volver al inicio">
-                <span className="lp-logo__mark" aria-hidden="true">
-                  R
-                </span>
-                <span className="lp-logo__word">RAMCO</span>
-              </a>
-              <p className="lp-footer__tagline">Marketing que vende. Tecnología que convierte.</p>
-              <p className="dim">Chile · Atención remota en todo el país</p>
-            </div>
+      {/* ------------------------------------------------------------ footer */}
+      <footer className="lp-footer">
+        <div className="lp-shell lp-footer__inner">
+          <div className="lp-footer__brand">
+            <a className="lp-footer__logo" href="#inicio">
+              RAMNCO <span className="lp-footer__logo-sub">· ASESORES</span>
+            </a>
+            <p className="lp-footer__tagline">
+              Publicidad estratégica · Crecimiento digital
+            </p>
+          </div>
 
-            <nav className="lp-footer__nav" aria-label="Enlaces del pie">
-              <a href="#servicios">Servicios</a>
-              <a href="#proceso">Cómo trabajamos</a>
-              <a href="#planes">Planes</a>
-              <a href="#porque">Por qué RAMCO</a>
-            </nav>
-
-            <div className="lp-footer__contact">
-              <a className="lp-footer__mail" href={MAILTO}>
-                <IconMail width={16} height={16} />
-                {CORREO}
-              </a>
-              <Link className="lp-footer__panel" href="/admin">
-                Panel interno
-              </Link>
-              <p className="dim">© RAMCO 2026 · Todos los derechos reservados.</p>
-            </div>
+          <div className="lp-footer__meta">
+            <a className="lp-footer__mail" href={MAILTO}>
+              <IconMail width={16} height={16} />
+              {CORREO}
+            </a>
+            <span className="lp-footer__copy">© 2026 RAMNCO</span>
+            <Link className="lp-footer__admin" href="/admin">
+              Acceso equipo
+            </Link>
           </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 }

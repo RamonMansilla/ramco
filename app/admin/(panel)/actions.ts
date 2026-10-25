@@ -1,6 +1,6 @@
 "use server";
 
-/* Server Actions del panel interno RAMCO.
+/* Server Actions del panel interno RAMNCO.
    Un único archivo para las 4 secciones CRUD. Cada action:
    requireUser() → valida/normaliza → mutación Supabase → revalidatePath() → redirect con ?ok / ?error. */
 

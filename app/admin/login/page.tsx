@@ -24,7 +24,7 @@ export default async function LoginPage({
       <div style={{ width: "100%", maxWidth: 400 }}>
         <div className="row" style={{ marginBottom: 22 }}>
           <span className="admin__dot" />
-          <strong style={{ letterSpacing: "0.18em", fontSize: ".95rem" }}>RAMCO</strong>
+          <strong style={{ letterSpacing: "0.18em", fontSize: ".95rem" }}>RAMNCO</strong>
           <span className="dim">· panel interno</span>
         </div>
 
@@ -32,7 +32,7 @@ export default async function LoginPage({
           <div>
             <h1 style={{ fontSize: "1.5rem", marginBottom: 4 }}>Ingresar</h1>
             <p className="dim" style={{ margin: 0 }}>
-              Acceso solo para el equipo RAMCO.
+              Acceso solo para el equipo RAMNCO.
             </p>
           </div>
 

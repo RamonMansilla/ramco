@@ -5,7 +5,7 @@ import { requireUser } from "@/lib/auth";
 import { logout } from "../login/actions";
 
 export const metadata: Metadata = {
-  title: { default: "Panel", template: "%s · Panel RAMCO" },
+  title: { default: "Panel", template: "%s · Panel RAMNCO" },
   robots: { index: false, follow: false },
 };
 
@@ -22,7 +22,7 @@ export default async function PanelLayout({
         <div className="row">
           <Link href="/admin" className="admin__brand">
             <span className="admin__dot" />
-            RAMCO
+            RAMNCO
           </Link>
           <span className="dim" style={{ marginLeft: 4 }}>
             panel interno
