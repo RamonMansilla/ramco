@@ -1138,3 +1138,17 @@ main:focus {
   font-size: 0.9rem;
   color: var(--lp-ink-3, var(--gris-2));
 }
+
+
+.sv-demo-cartera {
+  margin: 0 0 clamp(30px, 4vw, 52px);
+}
+
+.sv-demo-cartera__titulo {
+  margin: 0 0 14px;
+  font-family: var(--fuente-display, var(--fuente));
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--lp-ink, var(--blanco));
+}

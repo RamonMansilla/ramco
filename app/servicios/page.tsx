@@ -5,6 +5,7 @@ import { CATEGORIAS, contarServicios } from "@/lib/catalogo";
 import { FiltroServicios, ATRIBUTO_CATEGORIA, ATRIBUTO_TARJETA } from "@/components/servicios/filtro";
 import { NavegacionCategorias } from "@/components/servicios/navegacion";
 import { Reactivacion } from "@/components/reactivacion/reactivacion";
+import { DemoPanel } from "@/components/reactivacion/demo-panel";
 import {
   IconAndroid,
   IconApple,
@@ -263,6 +264,13 @@ export default function ServiciosPage() {
                 </p>
               </li>
             </ol>
+
+            <div className="sv-demo-cartera">
+              <p className="sv-demo-cartera__titulo">
+                Así se ve tu cartera recuperándose
+              </p>
+              <DemoPanel />
+            </div>
 
             <Reactivacion />
 
