@@ -109,15 +109,28 @@ Flujo: trabajar en `main-local` → probar con `run-local` → subir con `sync` 
 | `scripts\run-local.bat` | Ejecuta la app con tus cambios locales (`main-local`) |
 | `scripts\run-remote.bat` | Baja la última `main` desde GitHub y la ejecuta |
 | `scripts\sync.bat` | Commit, rebase sobre el remoto y push |
+| `publicar.bat` | Publica en Vercel (producción) ahora mismo |
+| `scripts\setup-vercel.bat` | Guarda el token de Vercel (una vez por PC) |
 
 `Start-RamcoApp.ps1` detecta el tipo de proyecto: con `package.json` instala dependencias y
 corre `dev`/`start`; si no, abre la landing estática o ejecuta Python.
 
 ## Despliegue
 
-1. Subir el repo a GitHub → **Vercel → Add New Project → Import** `RamonMansilla/ramco`.
-2. Cargar las mismas dos variables de entorno en Vercel (Settings → Environment Variables).
-3. Cada push a `main` publica automáticamente. Los push a `main-local` generan *preview*.
+**Sitio en producción:** <https://ramnco.vercel.app>
+
+- Proyecto Vercel: `ramnco` (team `team_5cvkq3WIBH6KLfjnhddq9wvg`).
+- Variables de entorno en Vercel: `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+- Publicar manualmente: doble clic en `publicar.bat`.
+- Publicación automática: tarea programada de Windows **«RAMNCO - Publicar en Vercel»**, cada
+  30 minutos; `scripts\deploy.ps1 -Latest` revisa si `main` avanzó y solo entonces publica.
+  Se administra desde el Programador de tareas; se puede desactivar o borrar cuando quieras.
+- Token de Vercel: guardado en `%USERPROFILE%\.ramnco-vercel-token`, **fuera** del repositorio.
+  Si expira, vuelve a ejecutar `scripts\setup-vercel.bat`.
+
+> La integración Git nativa de Vercel no se puede activar en esta cuenta porque entró con Google
+> y Vercel exige conectar GitHub como método de login. Por eso la automatización vive en la tarea
+> programada y en `deploy.ps1`.
 
 ## Colaboración
 

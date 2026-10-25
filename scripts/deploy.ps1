@@ -70,10 +70,12 @@ if ($Latest) {
 # 3. Publicar
 Push-Location $Root
 try {
-    $log = & npx.cmd --yes vercel@latest deploy --prod --yes --token $Token 2>&1
-    $log | Select-Object -Last 12 | ForEach-Object { Write-Host $_ }
+    # cmd.exe trata la salida de la CLI como texto normal (PowerShell la
+    # interpretaria como errores por escribir en stderr).
+    cmd /c "npx --yes vercel@latest deploy --prod --yes --token $Token 2>&1"
+    $code = $LASTEXITCODE
 
-    if ($LASTEXITCODE -ne 0) {
+    if ($code -ne 0) {
         Write-Host 'El despliegue fallo.' -ForegroundColor Red
         exit 1
     }
