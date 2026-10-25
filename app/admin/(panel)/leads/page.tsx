@@ -11,7 +11,7 @@ import {
   type Profile,
   type Stage,
 } from "@/lib/ui";
-import { createLead } from "../actions";
+import { createLead, importarLeads } from "../actions";
 
 export const metadata: Metadata = { title: "Leads" };
 
@@ -224,6 +224,47 @@ export default async function LeadsPage({
               Crear lead
             </button>
             <span className="dim">Solo la empresa es obligatoria.</span>
+          </div>
+        </form>
+      </details>
+
+      <details className="card" style={{ marginTop: 18 }}>
+        <summary style={{ cursor: "pointer", fontWeight: 600 }}>
+          Importar prospectos (pegar lista)
+        </summary>
+
+        <form action={importarLeads} style={{ marginTop: 18 }}>
+          <p className="dim" style={{ marginTop: 0 }}>
+            Una empresa por línea. Columnas separadas por <b>tabulación</b> o <b>punto y coma</b>:
+            <br />
+            <span className="mono">
+              empresa ; contacto ; correo ; teléfono ; web ; rubro ; notas
+            </span>
+            <br />
+            Solo la empresa es obligatoria. Máximo 300 por carga. Las líneas duplicadas o vacías se
+            ignoran.
+          </p>
+
+          <label className="field">
+            <span className="label">Lista</span>
+            <textarea
+              className="textarea"
+              name="lista"
+              rows={8}
+              placeholder={
+                "Panadería Los Robles; Camila Soto; contacto@losrobles.cl; +56 9 1111 1111; losrobles.cl; Alimentos; tiene web vieja\nClínica Dental Aurora; Ignacio Pérez; ignacio@dentalaurora.cl; +56 9 2222 2222; dentalaurora.cl; Salud; compra recurrente"
+              }
+            />
+          </label>
+
+          <div className="row" style={{ gap: 12 }}>
+            <label className="field" style={{ margin: 0, minWidth: 200 }}>
+              <span className="label">Origen</span>
+              <input className="input" name="source" defaultValue="prospeccion" />
+            </label>
+            <button className="btn btn--primary" type="submit" style={{ alignSelf: "end" }}>
+              Importar prospectos
+            </button>
           </div>
         </form>
       </details>

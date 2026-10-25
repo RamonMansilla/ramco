@@ -108,6 +108,49 @@ async function nextQuoteNumber(supabase: Supabase): Promise<string> {
   return `${prefix}${String(max + 1).padStart(3, "0")}`;
 }
 
+/** Carga masiva de prospectos desde una lista pegada (columnas separadas por tab o ;). */
+export async function importarLeads(formData: FormData): Promise<void> {
+  const { user, supabase } = await requireUser();
+
+  const crudo = str(formData, "lista");
+  const origen = nonEmpty(formData, "source") ?? "prospeccion";
+
+  if (!crudo) goError("/admin/leads", "Pega la lista de prospectos.");
+
+  const filas = crudo
+    .split(/\r?\n/)
+    .map((linea) => linea.trim())
+    .filter((linea) => linea.length > 0 && !/^empresa\b/i.test(linea))
+    .slice(0, 300);
+
+  if (filas.length === 0) goError("/admin/leads", "No se encontraron filas válidas.");
+
+  const registros = filas.map((linea) => {
+    const celdas = (linea.includes("\t") ? linea.split("\t") : linea.split(";")).map((c) =>
+      c.trim(),
+    );
+    return {
+      company: celdas[0] || "Sin nombre",
+      contact_name: celdas[1] || null,
+      email: celdas[2] || null,
+      phone: celdas[3] || null,
+      website: celdas[4] || null,
+      industry: celdas[5] || null,
+      source: origen,
+      stage: "nuevo" as const,
+      owner_id: user.id,
+      notes: celdas[6] || null,
+    };
+  });
+
+  const { error } = await supabase.from("leads").insert(registros);
+  if (error) goError("/admin/leads", `No se pudieron importar (${error.message}).`);
+
+  revalidatePath("/admin/leads");
+  revalidatePath("/admin");
+  goOk("/admin/leads", `${registros.length} prospectos importados.`);
+}
+
 /* ------------------------------------------------------------ leads */
 
 export async function createLead(formData: FormData): Promise<void> {
