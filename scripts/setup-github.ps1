@@ -40,6 +40,8 @@ catch {
 }
 
 # 2. Guardar credenciales para git (administrador de credenciales de Windows)
+#    Se quita el helper de GitHub CLI porque puede inyectar el token de otra cuenta.
+git config --global --unset-all 'credential.https://github.com.helper' 2>$null | Out-Null
 git -C $Root config --unset-all credential.helper 2>$null | Out-Null
 git -C $Root config --unset-all 'credential.https://github.com.helper' 2>$null | Out-Null
 git -C $Root config credential.helper manager
