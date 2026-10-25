@@ -193,6 +193,28 @@ function IconSpark(props: IconProps) {
   );
 }
 
+/** Flecha circular: reactivación / recuperación */
+function IconRefresh(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="M20.4 12a8.4 8.4 0 1 1-2.6-6.1" />
+      <path d="M20.6 4.2v5.2h-5.2" />
+    </svg>
+  );
+}
+
+/** Portapapeles con marcas: formularios y leads */
+function IconClipboard(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <rect x="4.8" y="4.6" width="14.4" height="16" rx="2.8" />
+      <path d="M9.2 4.6V3.2h5.6v1.4" />
+      <path d="m9.1 12.3 2.1 2.1 3.8-4.2" />
+      <path d="M9.1 17.2h5.8" />
+    </svg>
+  );
+}
+
 const ICONOS = {
   apps: IconApps,
   web: IconWeb,
@@ -205,6 +227,9 @@ const ICONOS = {
   api: IconApi,
   especial: IconEspecial,
   soporte: IconSoporte,
+  refresh: IconRefresh,
+  clipboard: IconClipboard,
+  spark: IconSpark,
 } as const;
 
 export type ClaveIcono = keyof typeof ICONOS;
@@ -231,4 +256,6 @@ export {
   IconLupa,
   IconArrowRight,
   IconSpark,
+  IconRefresh,
+  IconClipboard,
 };

@@ -9,6 +9,7 @@ const LINKS = [
   { href: "/admin/proyectos", label: "Proyectos" },
   { href: "/admin/cotizaciones", label: "Cotizaciones" },
   { href: "/admin/tareas", label: "Tareas" },
+  { href: "/admin/reactivacion", label: "Reactivación" },
   { href: "/admin/usuarios", label: "Usuarios" },
 ];
 

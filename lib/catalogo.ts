@@ -760,4 +760,218 @@ export const CATEGORIAS: CategoriaCatalogo[] = [
       },
     ],
   },
+
+  /* ------------------------------------------------------- 12 · nuevos */
+  {
+    id: "reactivacion",
+    nombre: "Reactivación de cartera",
+    resumen: "Clientes que ya te compraron y volvieron a desaparecer: se recuperan.",
+    icono: "refresh",
+    servicios: [
+      {
+        nombre: "Depuración de cartera antigua",
+        descripcion: "Limpiamos duplicados, teléfonos muertos y correos inválidos de tu base histórica antes de volver a contactar.",
+        resultado: "Base limpia y segmentada",
+      },
+      {
+        nombre: "Segmentación por comportamiento",
+        descripcion: "Ordenamos la cartera por quién compró, cuánto, cuándo y qué producto, para priorizar a los mejores.",
+        resultado: "Cartera priorizada",
+      },
+      {
+        nombre: "Reactivación por WhatsApp",
+        descripcion: "Mensajes personalizados por segmento, con respuesta automática y derivación al ejecutivo.",
+        resultado: "Conversaciones recuperadas",
+      },
+      {
+        nombre: "Campaña de reactivación por correo",
+        descripcion: "Secuencia de correos con oferta relevante, medición de aperturas y respuestas.",
+        resultado: "Secuencia activa",
+      },
+      {
+        nombre: "Llamadas asistidas por guion",
+        descripcion: "Guion por segmento, registro de llamadas y seguimiento de cada intento.",
+        resultado: "Guion y bitácora",
+      },
+      {
+        nombre: "Detección de clientes dormidos",
+        descripcion: "Alertas automáticas cuando un cliente habitual deja de comprar durante el período definido.",
+        resultado: "Alertas automáticas",
+      },
+      {
+        nombre: "Ofertas de regreso",
+        descripcion: "Define descuento, recarga o beneficio según el valor histórico del cliente.",
+        resultado: "Oferta por segmento",
+      },
+      {
+        nombre: "Panel de recuperación",
+        descripcion: "Cuántos contactados, cuántos respondieron y cuánto ingreso se recuperó, en una vista.",
+        resultado: "Panel de resultados",
+      },
+      {
+        nombre: "Reactivación de clientes que no pagaron",
+        descripcion: "Seguimiento a compras inconclusas, cotizaciones vencidas y clientes que quedaron en pausa.",
+        resultado: "Cartera recuperada",
+      },
+      {
+        nombre: "Plan de seguimiento post-recompra",
+        descripcion: "Para que el cliente recuperado no vuelva a desaparecer: recordatorios y contacto periódico.",
+        resultado: "Cliente retenido",
+      },
+    ],
+  },
+  {
+    id: "formularios",
+    nombre: "Formularios y leads",
+    resumen: "Captura, califica y envía cada contacto al lugar correcto.",
+    icono: "clipboard",
+    servicios: [
+      {
+        nombre: "Formularios inteligentes",
+        descripcion: "Preguntas condicionales según lo que la persona responde, sin pedir datos innecesarios.",
+        resultado: "Formulario adaptativo",
+      },
+      {
+        nombre: "Captura multiformato",
+        descripcion: "Contacto desde web, WhatsApp, redes sociales, teléfono o correo, todo en un mismo lugar.",
+        resultado: "Leads centralizados",
+      },
+      {
+        nombre: "Calificación automática",
+        descripcion: "Prioriza por presupuesto, urgencia, ubicación y tamaño del proyecto antes de que lo vea un ejecutivo.",
+        resultado: "Leads calificados",
+      },
+      {
+        nombre: "Enrutamiento de leads",
+        descripcion: "Cada lead se asigna solo a la persona o sucursal que corresponde.",
+        resultado: "Asignación automática",
+      },
+      {
+        nombre: "Respuesta inmediata",
+        descripcion: "El contacto recibe respuesta en segundos, aunque estés cerrado o en reunión.",
+        resultado: "Respuesta 24/7",
+      },
+      {
+        nombre: "Anti-spam y doble validación",
+        descripcion: "Bloquea bots, valida correos y teléfonos reales antes de crear el contacto.",
+        resultado: "Registros válidos",
+      },
+      {
+        nombre: "Envío a CRM o planilla",
+        descripcion: "Los datos caen donde tu equipo ya trabaja: CRM, Google Sheets o correo.",
+        resultado: "Integración lista",
+      },
+      {
+        nombre: "Notificación al equipo",
+        descripcion: "Aviso inmediato por WhatsApp o correo con el resumen del contacto nuevo.",
+        resultado: "Alertas al instante",
+      },
+    ],
+  },
+  {
+    id: "agencia",
+    nombre: "Agencia y contenido",
+    resumen: "Marca, contenido y piezas listas para vender.",
+    icono: "spark",
+    servicios: [
+      {
+        nombre: "Identidad visual de marca",
+        descripcion: "Logo, colores, tipografía y aplicación de marca en todos los soportes.",
+        resultado: "Manual de marca",
+      },
+      {
+        nombre: "Diseño de piezas para redes",
+        descripcion: "Publicaciones, historias y carruseles con diseño consistente mes a mes.",
+        resultado: "Piezas mensuales",
+      },
+      {
+        nombre: "Calendario de contenido",
+        descripcion: "Plan editorial con temas, formatos y fechas para no improvisar.",
+        resultado: "Calendario editable",
+      },
+      {
+        nombre: "Redacción y copywriting",
+        descripcion: "Textos que explican el valor de tu oferta y empujan a la acción.",
+        resultado: "Textos listos",
+      },
+      {
+        nombre: "Gestión de redes sociales",
+        descripcion: "Publicación, respuesta a mensajes y comunidad, con reporte mensual.",
+        resultado: "Redes activas",
+      },
+      {
+        nombre: "Producción audiovisual",
+        descripcion: "Videos cortos y reels a partir de tu material o grabaciones guiadas.",
+        resultado: "Videos publicables",
+      },
+      {
+        nombre: "Fotografía y edición de producto",
+        descripcion: "Fichas de producto con fondos limpios y medidas uniformes para tienda online.",
+        resultado: "Galería lista",
+      },
+      {
+        nombre: "Landing para campaña",
+        descripcion: "Página específica para una campaña, con mensaje único y medición de conversión.",
+        resultado: "Landing medida",
+      },
+      {
+        nombre: "Email marketing",
+        descripcion: "Boletines y secuencias con diseño propio y métricas de apertura y clic.",
+        resultado: "Campaña enviada",
+      },
+    ],
+  },
+  {
+    id: "asistente",
+    nombre: "Asistente comercial con IA",
+    resumen: "Un vendedor que no duerme: contacta, califica y agenda solo.",
+    icono: "chat",
+    servicios: [
+      {
+        nombre: "Agente de prospección automática",
+        descripcion: "Contacta prospectos nuevos por WhatsApp, correo o Instagram de forma autónoma.",
+        resultado: "Contactos iniciados",
+      },
+      {
+        nombre: "Calificación conversacional",
+        descripcion: "Hace las preguntas necesarias y ordena al prospecto según su intención real.",
+        resultado: "Prospectos priorizados",
+      },
+      {
+        nombre: "Agenda de reuniones automática",
+        descripcion: "Ofrece horarios disponibles, confirma y agenda en el calendario del ejecutivo.",
+        resultado: "Reuniones agendadas",
+      },
+      {
+        nombre: "Seguimiento sin olvidos",
+        descripcion: "Insiste con cada conversación inconclusa hasta obtener respuesta o descarte.",
+        resultado: "Seguimiento continuo",
+      },
+      {
+        nombre: "Atención 24/7",
+        descripcion: "Responde fuera de horario, fines de semana y feriados sin perder el contexto.",
+        resultado: "Atención continua",
+      },
+      {
+        nombre: "Entrenado con tu información",
+        descripcion: "Trabaja con tus precios, servicios y condiciones, no con respuestas genéricas.",
+        resultado: "Respuestas exactas",
+      },
+      {
+        nombre: "Traspaso a persona",
+        descripcion: "Cuando la conversación lo requiere, deriva al ejecutivo con todo el historial.",
+        resultado: "Derivación con contexto",
+      },
+      {
+        nombre: "Registro en el CRM",
+        descripcion: "Cada conversación queda guardada con el estado comercial del prospecto.",
+        resultado: "Historial completo",
+      },
+      {
+        nombre: "Reporte diario de ventas",
+        descripcion: "Cuántos contactados, cuántas respuestas y cuántas reuniones quedaron agendadas.",
+        resultado: "Reporte diario",
+      },
+    ],
+  },
 ];

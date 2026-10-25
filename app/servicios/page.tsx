@@ -4,6 +4,7 @@ import "./servicios.css";
 import { CATEGORIAS, contarServicios } from "@/lib/catalogo";
 import { FiltroServicios, ATRIBUTO_CATEGORIA, ATRIBUTO_TARJETA } from "@/components/servicios/filtro";
 import { NavegacionCategorias } from "@/components/servicios/navegacion";
+import { Reactivacion } from "@/components/reactivacion/reactivacion";
 import {
   IconAndroid,
   IconApple,
@@ -217,6 +218,61 @@ export default function ServiciosPage() {
           })}
           </div>
         </div>
+
+        {/* ------------------------------------------- recuperar cartera */}
+        <section className="sv-seccion sv-seccion--cartera" id="cartera" aria-labelledby="cartera-titulo">
+          <div className="sv-shell">
+            <header className="sv-cabecera">
+              <p className="sv-eyebrow">
+                <span className="sv-eyebrow__dot" aria-hidden="true" />
+                Lo que casi nadie te ofrece
+              </p>
+              <h2 className="sv-h2" id="cartera-titulo">
+                Recupera los clientes que ya tuviste
+              </h2>
+              <p className="sv-lead">
+                Antes de gastar en clientes nuevos, hay dinero dormido en tu propia base: personas
+                que te compraron, te cotizaron o dejaron de aparecer. Las identificamos, las
+                contactamos y las volvemos a traer.
+              </p>
+            </header>
+
+            <ol className="sv-pasos-cartera">
+              <li>
+                <span className="sv-pasos-cartera__num">01</span>
+                <h3>Ordenamos la cartera</h3>
+                <p>
+                  Limpiamos duplicados, teléfonos inválidos y correos muertos. Segmentamos por
+                  quién compró, cuánto y cuándo.
+                </p>
+              </li>
+              <li>
+                <span className="sv-pasos-cartera__num">02</span>
+                <h3>Contactamos con una razón</h3>
+                <p>
+                  Mensaje personalizado por segmento: recuperación, oferta de regreso o
+                  recordatorio de lo que tenía pendiente.
+                </p>
+              </li>
+              <li>
+                <span className="sv-pasos-cartera__num">03</span>
+                <h3>Medimos lo recuperado</h3>
+                <p>
+                  Cada contacto tiene estado y valor: contactado, respondió, cotizó, recuperado.
+                  El panel muestra cuánto ingreso volvió.
+                </p>
+              </li>
+            </ol>
+
+            <Reactivacion />
+
+            <p className="sv-nota-cartera">
+              El servicio se puede contratar suelto o incluido en el <a href="/planes">Plan de
+              Crecimiento</a>. También sirve para carteras que están en planillas, CRM antiguos o
+              correos sueltos.
+            </p>
+          </div>
+        </section>
 
         {/* ------------------------------------------------------------ cierre */}
         <section className="sv-cierre" aria-labelledby="cierre-titulo">
