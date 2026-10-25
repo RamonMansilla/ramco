@@ -9,7 +9,7 @@ html {
   scroll-behavior: smooth;
 }
 
-.lp-page {
+:root {
   --lp-bg: #07060f;
   --lp-bg-2: #0b0918;
   --lp-surface: rgba(19, 15, 38, 0.72);
@@ -30,7 +30,11 @@ html {
   --lp-shell: 1200px;
   --lp-gutter: clamp(18px, 4.4vw, 44px);
   --lp-section-y: clamp(60px, 9vw, 124px);
+  /* rojo de los ganchos (palabras clave que se resaltan) */
+  --lp-hook: #ff4d5e;
+}
 
+.lp-page {
   position: relative;
   /* recorta marquesina y glows: evita scroll horizontal en móvil */
   overflow-x: clip;
@@ -2169,3 +2173,40 @@ main:focus {
   }
 }
 
+
+/* ------------------------------------------------ hero: máquina de escribir */
+.hero-mq {
+  display: grid;
+  gap: 0.06em;
+}
+
+.hero-mq__linea1,
+.hero-mq__linea2 {
+  display: block;
+}
+
+.hero-mq__gancho {
+  color: var(--lp-hook);
+  text-shadow: 0 0 34px rgba(255, 77, 94, 0.32);
+  position: relative;
+}
+
+.hero-mq__linea2 {
+  min-height: 1.15em;
+  color: var(--lp-ink-2);
+}
+
+.hero-mq .mq-cursor {
+  background: var(--lp-hook);
+  box-shadow: 0 0 16px rgba(255, 77, 94, 0.75);
+}
+
+.hero-mq__fantasma {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-mq .mq-cursor {
+    display: none;
+  }
+}

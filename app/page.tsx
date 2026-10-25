@@ -5,6 +5,8 @@ import "./landing.css";
 import { MAILTO, CORREO, SiteNav } from "@/components/landing/site-nav";
 import { ScrollReveal } from "@/components/landing/reveal";
 import { Proyeccion } from "@/components/grafico/proyeccion";
+import { HeroMaquina } from "@/components/maquina/hero-maquina";
+import { SectionHead } from "@/components/landing/section-head";
 import {
   IconArrowDown,
   IconArrowRight,
@@ -154,38 +156,6 @@ const PANEL_METRICAS = [
 
 /* ----------------------------------------------------------- piezas locales */
 
-function SectionHead({
-  index,
-  label,
-  title,
-  lead,
-  titleId,
-}: {
-  index: string;
-  label: string;
-  title: ReactNode;
-  lead?: string;
-  titleId: string;
-}) {
-  return (
-    <header className="lp-sec__head" data-reveal data-delay="0">
-      <div className="lp-sec__intro">
-        <p className="lp-kicker">
-          <span className="lp-kicker__num">{index}</span>
-          <span className="lp-kicker__sep" aria-hidden="true">
-            /
-          </span>
-          <span className="lp-kicker__label">{label}</span>
-        </p>
-        <h2 className="lp-h2" id={titleId}>
-          {title}
-        </h2>
-      </div>
-      {lead ? <p className="lp-sec__lead">{lead}</p> : null}
-    </header>
-  );
-}
-
 /* ---------------------------------------------------------------- página */
 
 export default function HomePage() {
@@ -213,12 +183,12 @@ export default function HomePage() {
               </p>
 
               <h1 className="lp-h1" id="hero-title">
-                Publicidad que{" "}
-                <span className="lp-grad lp-grad--live">convierte en ventas</span>
+                <HeroMaquina primera="comercial" />
               </h1>
 
               <p className="lp-hero__lead">
-                Estrategia, pauta y optimización para hacer crecer tu negocio.
+                Publicidad, web y aplicaciones que hacen crecer tu negocio. Sube de nivel
+                con una estrategia que se mide.
               </p>
 
               <div className="lp-hero__actions">
@@ -310,7 +280,9 @@ export default function HomePage() {
             <SectionHead
               index="02"
               label="EL DESAFÍO"
-              title="Crecer sin desperdiciar presupuesto"
+              antes="Crecer sin"
+              gancho="desperdiciar"
+              despues="presupuesto"
               lead="La pauta sin una estrategia clara suele generar tráfico, pero no ventas."
               titleId="desafio-title"
             />
@@ -361,7 +333,8 @@ export default function HomePage() {
             <SectionHead
               index="03"
               label="MÉTODO"
-              title="Cómo atraemos clientes"
+              antes="Cómo atraemos"
+              gancho="clientes"
               lead="Conectamos la intención de búsqueda con campañas que generan demanda."
               titleId="metodo-title"
             />
@@ -405,11 +378,8 @@ export default function HomePage() {
             <SectionHead
               index="04"
               label="CANALES"
-              title={
-                <>
-                  Google Ads <span className="lp-plus">+</span> Meta Ads
-                </>
-              }
+              antes="Google Ads"
+              gancho="+ Meta Ads"
               lead="Dos canales, una misma estrategia comercial."
               titleId="canales-title"
             />
@@ -458,11 +428,8 @@ export default function HomePage() {
             <SectionHead
               index="05"
               label="ASESORÍA RAMNCO"
-              title={
-                <>
-                  Servicio integral <span className="lp-grad">360°</span>
-                </>
-              }
+              antes="Servicio integral"
+              gancho="360°"
               lead="No solo hacemos publicidad: también diseñamos, construimos y mantenemos el sitio donde esa publicidad convierte."
               titleId="asesoria-title"
             />
@@ -527,7 +494,8 @@ export default function HomePage() {
             <SectionHead
               index="06"
               label="PROYECCIÓN"
-              title="La diferencia de trabajar con RAMNCO"
+              antes="La diferencia de trabajar con"
+              gancho="RAMNCO"
               lead="Compara tu ganancia estimada a 12 meses con y sin estrategia. Mueve los supuestos para verlo con los números de tu negocio."
               titleId="proyeccion-title"
             />
@@ -541,7 +509,8 @@ export default function HomePage() {
             <SectionHead
               index="07"
               label="MEDICIÓN"
-              title="Resultados que puedes ver"
+              antes="Resultados que puedes"
+              gancho="ver"
               titleId="medicion-title"
             />
 
