@@ -1,10 +1,18 @@
 # Dependencias y artefactos
 node_modules/
 
+# Next.js
+.next/
+out/
+.vercel/
+next-env.d.ts
+*.tsbuildinfo
+
 # Variables de entorno y credenciales (NUNCA subir)
 .env
 .env.*
 *.local
+!.env.example
 
 # Sistema
 .DS_Store
