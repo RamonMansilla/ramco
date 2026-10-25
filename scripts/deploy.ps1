@@ -43,26 +43,49 @@ catch {
     exit 1
 }
 
-# 2. Modo -Latest: solo publicar si `main` avanzo
+# 2. Modo -Latest: publicar solo si hay cambios reales sin publicar
 if ($Latest) {
     Push-Location $Root
     try {
         git fetch origin main --quiet
-        $local = (git rev-parse HEAD).Trim()
         $remote = (git rev-parse 'origin/main').Trim()
+
         $stateFile = Join-Path $env:LOCALAPPDATA 'ramnco\last-deployed.txt'
         New-Item -ItemType Directory -Force -Path (Split-Path $stateFile -Parent) | Out-Null
         $last = if (Test-Path $stateFile) { (Get-Content $stateFile -Raw).Trim() } else { '' }
 
-        if ($local -eq $remote -and $last -eq $remote) {
-            Write-Host "Sin cambios en main ($remote). Nada que publicar." -ForegroundColor DarkGray
+        # Primer arranque: se asume que lo publicado es lo que esta en main.
+        if (-not $last) {
+            Set-Content -LiteralPath $stateFile -Value $remote -NoNewline
+            Write-Host "Primera ejecucion: se toma $remote como base. Nada que publicar." -ForegroundColor DarkGray
             exit 0
         }
+
         if ($last -eq $remote) {
-            Write-Host "main ya fue publicado ($remote)." -ForegroundColor DarkGray
+            Write-Host "Sin cambios: main sigue en $($remote.Substring(0,7)). Nada que publicar." -ForegroundColor DarkGray
             exit 0
         }
-        Write-Host "main avanzó: $last -> $remote. Publicando..." -ForegroundColor Cyan
+
+        # Comprobar que los cambios tocan archivos del sitio (no solo scripts o docs).
+        $changed = @(git diff --name-only $last $remote)
+        if ($changed.Count -eq 0) {
+            Set-Content -LiteralPath $stateFile -Value $remote -NoNewline
+            Write-Host 'Sin archivos distintos entre versiones. Nada que publicar.' -ForegroundColor DarkGray
+            exit 0
+        }
+
+        $ignored = '^(scripts/|\.github/|devting/|README\.md$|\.gitattributes$|automatizacion/|_verify/|_research/)'
+        $siteChanges = @($changed | Where-Object { $_ -notmatch $ignored })
+
+        if ($siteChanges.Count -eq 0) {
+            Write-Host "Solo cambiaron archivos que no se publican ($($changed.Count)). No se despliega." -ForegroundColor DarkGray
+            $changed | Select-Object -First 5 | ForEach-Object { Write-Host "  - $_" -ForegroundColor DarkGray }
+            Set-Content -LiteralPath $stateFile -Value $remote -NoNewline
+            exit 0
+        }
+
+        Write-Host "Hay $($siteChanges.Count) archivo(s) del sitio con cambios ($($last.Substring(0,7)) -> $($remote.Substring(0,7))):" -ForegroundColor Cyan
+        $siteChanges | Select-Object -First 8 | ForEach-Object { Write-Host "  + $_" -ForegroundColor DarkGray }
     }
     finally { Pop-Location }
 }
@@ -76,16 +99,15 @@ try {
     $code = $LASTEXITCODE
 
     if ($code -ne 0) {
-        Write-Host 'El despliegue fallo.' -ForegroundColor Red
+        Write-Host 'El despliegue fallo. Se reintentara en la proxima revision.' -ForegroundColor Red
         exit 1
     }
 
     if ($Latest) {
         $remote = (git rev-parse 'origin/main').Trim()
         $stateFile = Join-Path $env:LOCALAPPDATA 'ramnco\last-deployed.txt'
-        New-Item -ItemType Directory -Force -Path (Split-Path $stateFile -Parent) | Out-Null
         Set-Content -LiteralPath $stateFile -Value $remote -NoNewline
-        Write-Host "Publicado $remote" -ForegroundColor Green
+        Write-Host "Publicado $($remote.Substring(0,7))" -ForegroundColor Green
     } else {
         Write-Host 'Listo: https://ramnco.vercel.app' -ForegroundColor Green
     }
